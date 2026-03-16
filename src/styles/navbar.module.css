@@ -1,0 +1,65 @@
+/* ======================================================
+   NAVBAR CONTAINER
+   ====================================================== */
+
+   .navbar {
+    z-index: 10; 
+    padding: .5em 1em;
+
+    /* Flex layout for horizontal navigation */
+    display: flex;
+    justify-content: space-between; /* Push logo left, links right */
+    align-items: center;            /* Vertically center items */
+}
+
+
+/* ======================================================
+   LOGO / BRAND
+   ====================================================== */
+
+.navbar .logo {
+    font-size: var(--fsize-large); /* Logo text size */
+    margin-left: var(--fsize-xsmol);
+
+    color: var(--text-color-dark); /* Default logo colour */
+    text-decoration: none;
+    font-weight: bold;
+
+    /* Smooth hover transition */
+    transition: color var(--base-transition-time) ease;
+}
+
+.navbar .logo:hover {
+    color: var(--hover-color); /* Highlight colour on hover */
+}
+
+
+/* ======================================================
+   NAVIGATION LINKS
+   ====================================================== */
+
+.navbar .routeb {
+    transition: color var(--base-transition-time) ease;
+
+    color: var(--text-color);
+    font-size: var(--fsize-large);
+
+    margin-right: 2%; /* Space between links */
+
+    text-decoration: none;
+}
+
+.navbar .routeb:hover {
+    color: var(--hover-color);
+}
+
+
+/* ======================================================
+   RESPONSIVE ADJUSTMENT
+   ====================================================== */
+
+@media screen and (max-width: 1279px) {
+    .navbar .logo {
+        margin-left: 0;
+    }
+}

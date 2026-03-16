@@ -1,0 +1,501 @@
+/* ======================================================
+   MAIN PAGE CONTAINER
+   ====================================================== */
+
+/* Main wrapper for the homepage content */
+.homedivmain {
+  padding-left: var(--main-div-padding-left);
+  padding-right: var(--main-div-padding-left);
+}
+
+
+/* ======================================================
+   ABOUT SECTION
+   ====================================================== */
+
+/* Container for the about text */
+.aboutDiv {
+  font-size: var(--fsize-about);
+  margin-top: var(--normal-margin-top);
+  padding-top: 10px;
+
+  /* Fade in animation on page load */
+  animation: fadeIn var(--normal-transition-time) ease-in-out 0s;
+}
+
+/* Profile / about image styling */
+.aboutImage {
+  display: block;
+  margin: 20px auto;
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+
+/* ======================================================
+   SKILLS SECTION
+   ====================================================== */
+
+/* Container holding skill tags */
+.skillsDiv {
+  margin-top: var(--normal-margin-top);
+  max-width: 900px;
+
+  /* Flex layout for wrapping tags */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Prevent visited links from changing color */
+.skillsDiv a:visited {
+  color: inherit;
+}
+
+/* Underline skill links on hover */
+.skillsDiv a:hover {
+  text-decoration: underline;
+}
+
+/* Shared styling for skill links and spans */
+.skillsDiv a,
+.skillsDiv span {
+  font-size: var(--fsize-smol);
+  display: inline-block;
+  border-radius: 5px;
+
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 10px;
+
+  border: 1px solid;
+  text-decoration: none;
+  color: inherit;
+
+  /* Flip animation when appearing */
+  animation: flipInY var(--smooth-transition-time) ease;
+
+  /* Required for 3D flip animation */
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+
+/* ======================================================
+   INTRO SECTION
+   ====================================================== */
+
+/* Container for introduction text */
+.introDiv {
+  margin-top: var(--normal-margin-top);
+
+  /* Slower fade-in animation */
+  animation: fadeInSlow var(--smooth-transition-time) ease;
+}
+
+/* Wrapper for intro lines */
+.introDiv span {
+  display: inline-block;
+  margin-bottom: 2em;
+}
+
+/* Small heading text */
+.introDiv h6 {
+  font-size: var(--fsize-smol);
+  display: inline;
+}
+
+/* Main intro heading */
+.introDiv span h3 {
+  font-size: var(--fsize-large);
+  display: inline;
+}
+
+/* Subheading */
+.introDiv h4 {
+  font-size: var(--fsize-mid);
+}
+
+/* Main name/title heading */
+.introDiv h1 {
+  font-size: var(--fsize-xlarge);
+}
+
+/* Align elements on the same line with baseline alignment */
+.inlineContainer {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+}
+
+/* Ensure headings align correctly in inline container */
+.inlineContainer h6, 
+.inlineContainer h4 {
+  margin: 0;
+  line-height: 1;
+  vertical-align: baseline;
+  display: inline;
+}
+
+
+/* ======================================================
+   CONTACT SECTION
+   ====================================================== */
+
+/* Contact section container */
+.contactDiv {
+  margin-top: var(--normal-margin-top);
+
+  /* Fade in animation */
+  animation: fadeIn2 var(--normal-transition-time) ease;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Contact heading */
+.contactDiv h3 {
+  font-size: var(--fsize-mid);
+  margin-bottom: 0.5em;
+}
+
+/* Contact description text */
+.contactDiv p {
+  font-size: var(--fsize-about);
+  margin-bottom: 1em;
+}
+
+
+/* ======================================================
+   EMAIL BUTTON
+   ====================================================== */
+
+/* Email link styled like a button */
+.emailLink {
+
+  /* Reset default button styles */
+  background: none;
+  border: none;
+  margin: 0;
+  font: inherit;
+  text-align: inherit;
+  color: inherit;
+
+  /* Custom styles */
+  display: block;
+  margin-top: 0.5em;
+  padding: 5px 10px;
+
+  cursor: pointer;
+  color: var(--text-color);
+
+  /* Slight downward offset for hover animation */
+  transform: translateY(3px);
+
+  border-radius: 5px;
+
+  transition: transform var(--base-transition-time) ease,
+              background-color var(--base-transition-time) ease-in;
+}
+
+/* Hover effect for email button */
+.emailLink:hover {
+  transform: translateY(0);
+  background-color: var(--highlight-color);
+}
+
+/* Prevent visited links changing color */
+.emailLink:visited,
+.resumeBtn:visited {
+  color: var(--text-color);
+}
+
+/* Wrapper for email + copied text */
+.emailWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Mail icon styling */
+.mailIcon {
+  display: inline-block;
+  vertical-align: middle;
+
+  width: 1.5em;
+  height: 1.5em;
+
+  margin: 0.15em;
+
+  fill: var(--text-color);
+  color: var(--text-color); 
+}
+
+/* "Copied" confirmation text */
+.copied {
+  margin-top: 0.3em;
+  margin-left: 0;
+
+  font-size: var(--fsize-smol);
+  color: var(--tag-color);
+}
+
+
+/* ======================================================
+   RESUME BUTTON
+   ====================================================== */
+
+.resumeBtn {
+  margin-top: 1em;
+
+  display: block;
+  width: max-content;
+
+  text-decoration: none;
+  font-size: var(--fsize-smoll);
+
+  border: 1px solid var(--text-color-dark);
+  border-radius: 5px;
+
+  color: var(--text-color-dark);
+  background-color: var(--secondary-color);
+
+  padding: 10px 15px;
+
+  transition: all var(--base-transition-time) ease;
+}
+
+/* Hover glow effect */
+.contactDiv .resumeBtn:hover {
+  color: var(--hover-color);
+  border-color: var(--hover-color);
+  box-shadow: 0px 0px 2px 2px var(--hover-color);
+}
+
+
+/* ======================================================
+   ANIMATIONS
+   ====================================================== */
+
+/* Slow fade in (delayed visibility) */
+@keyframes fadeInSlow {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  30% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Standard fade in */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Secondary fade in */
+@keyframes fadeIn2 {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animated background fill */
+@keyframes fillBackground {
+  0% {
+    background-size: 0% 100%;
+  }
+  100% {
+    background-size: 100% 100%;
+  }
+}
+
+/* 3D flip animation for skill tags */
+@keyframes flipInY {
+  0% {
+    transform: perspective(400px) rotateY(90deg) translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: perspective(400px) rotateY(0deg) translateY(0);
+    opacity: 1;
+  }
+}
+
+
+/* ======================================================
+   SIDEBAR SECTION
+   ====================================================== */
+
+/* Sidebar container */
+.sidebarDiv {
+  opacity: 0;
+  animation: fadeInUp var(--smooth-transition-time) ease;
+}
+
+/* Sidebar slide-up animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(calc(100% + 40px));
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sidebar list container */
+.sidebarDiv ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  bottom: 0;
+}
+
+/* Sidebar list items */
+.sidebarDiv li {
+  list-style-type: none;
+}
+
+
+/* ======================================================
+   SOCIAL / LOGO ICONS
+   ====================================================== */
+
+/* Icon container */
+.logoDiv {
+  width: var(--fsize-large);
+  height: var(--fsize-large);
+  transition: all var(--base-transition-time) ease;
+}
+
+/* Default icon color */
+.logoDiv svg {
+  transition: fill var(--base-transition-time) ease;
+  fill: var(--sub-text-color);
+}
+
+/* Hover color change */
+.logoDiv:hover svg {
+  fill: var(--text-color-dark);
+}
+
+/* Hover movement + glow */
+.logoDiv:hover {
+  filter: drop-shadow(0px 0px 10px var(--hover-color)); 
+  transform: translateY(-3px);
+}
+
+
+/* ======================================================
+   RESPONSIVE STYLES
+   ====================================================== */
+
+/* Tablet / small desktop layout */
+@media screen and (max-width: 1279px) {
+
+  .contactDiv h3,
+  .contactDiv p {
+    display: inline-block;
+  }
+
+  /* Sidebar becomes bottom navigation */
+  .sidebarDiv {
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    margin-bottom: 0.7em;
+  }
+
+  .sidebarDiv ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebarDiv li {
+    float: left;
+    margin-left: 1.5em;
+  }
+}
+
+
+/* Reduce spacing on short screens */
+@media screen and (max-height: 700px) {
+  .skillsDiv {
+    margin-top: var(--min-margin-top);
+  }
+}
+
+
+/* Large desktop layout */
+@media screen and (min-width: 1280px) {
+
+  /* Vertical sidebar */
+  .sidebarDiv {
+    position: fixed;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    height: 100%;
+  }
+
+  /* Decorative vertical line under icons */
+  .sidebarDiv ul::after {
+    opacity: 0.69;
+    content: "";
+    background-color: var(--sub-text-color);
+
+    display: block;
+    width: 1px;
+
+    margin: 30px auto;
+    margin-bottom: 0;
+
+    height: var(--normal-margin-top);
+  }
+
+  .sidebarDiv ul {
+    padding-left: 3em;
+  }
+
+  .sidebarDiv li {
+    margin-left: 0;
+    margin-top: 2em;
+  }
+}
+
+
+/* ======================================================
+   TEXT HIGHLIGHT
+   ====================================================== */
+
+/* Used to highlight name or important text */
+.nameHighlight {
+  color: var(--hover-color);
+}

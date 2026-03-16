@@ -1,0 +1,301 @@
+/* =========================================
+   Experience List Container
+   Holds the entire experience section
+========================================= */
+.expListContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    /* Optional top spacing */
+    /* margin-top: var(--normal-margin-top); */
+
+    /* Fade-in animation when the section loads */
+    animation: fadeIn var(--normal-transition-time) ease;
+}
+
+/* Animation used when experience sections appear */
+@keyframes fadeIn {
+    from {
+        transform: translateY(-2em); /* slide down slightly */
+        opacity: 0; /* start invisible */
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1; /* fully visible */
+    }
+}
+
+
+/* =========================================
+   Common Experience Holder
+   Container for each experience item
+========================================= */
+.expContainer {
+    padding-top: 0.5em;
+    font-size: var(--fsize-smol);
+}
+
+/* Left side of the experience container
+   typically contains title and duration */
+.expContainerLeft {
+    float: left;
+}
+
+/* Ensures title and duration stack vertically */
+.expContainerLeft span {
+    display: block;
+}
+
+/* Experience title styling */
+.expTitle {
+    font-size: var(--fsize-smol);
+    text-align: left;
+}
+
+/* Links inside titles (e.g. company links) */
+.expTitle a {
+    color: var(--tag-color);
+    text-decoration: none;
+}
+
+/* Duration text (date range) */
+.expDuration {
+    color: var(--sub-text-color);
+    font-size: var(--fsize-smol);
+}
+
+
+/* =========================================
+   Expand / Collapse Button
+   Used to toggle the detailed view
+========================================= */
+.expMaxMin {
+    float: right;
+    width: 2ch;
+    font-size: var(--fsize-mid);
+    text-align: center;
+
+    border-radius: 100%;
+    color: var(--text-color-dark);
+    background-color: var(--highlight-color);
+
+    cursor: pointer;
+
+    /* Smooth hover transition */
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Hover effect for expand/collapse button */
+.expMaxMin:hover {
+    opacity: 0.9;
+    background-color: var(--text-color-dark);
+    color: var(--primary-color);
+}
+
+
+/* =========================================
+   Expanded Experience Content
+   Contains description and details
+========================================= */
+.contentDiv {
+    font-size: var(--fsize-smol);
+    position: relative;
+    display: inline-block;
+
+    padding-top: .5em;
+    padding-left: 1em;
+}
+
+/* Links inside the expanded content */
+.contentDiv a {
+    text-decoration: none;
+}
+
+/* List items within markdown or description */
+.contentDiv li {
+    font-size: var(--fsize-smol);
+    padding: var(--li-padding);
+}
+
+
+/* Container for the expanded view */
+.expViewContainer {
+    margin-top: var(--min-margin-top);
+
+    /* Smooth open/close transition */
+    transition: all var(--smooth-transition-time)
+        cubic-bezier(0.23, 1, 0.32, 1);
+
+    /* Fade in animation when expanded */
+    animation: fadeIn var(--normal-transition-time) ease;
+}
+
+/* Fade in inner content slightly after container */
+.expViewContainer .contentDiv,
+.expViewContainer .skillUsed {
+    animation: fadeIn2 var(--smooth-transition-time)
+        cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+/* Secondary fade animation for inner content */
+@keyframes fadeIn2 {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* =========================================
+   Skills Used Section
+   Displays technology tags
+========================================= */
+.skillUsed {
+    align-content: center;
+    padding-left: 1em;
+}
+
+/* Individual skill tag */
+.skillUsed span {
+    font-size: var(--fsize-xsmol);
+    /* font-size: var(--fsize-smol); */
+
+    display: inline-block;
+
+    border-radius: 5px;
+
+    margin-left: 10px;
+    margin-top: 10px;
+
+    padding-left: 6px;
+    padding-right: 6px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+
+    color: var(--skill-box-color);
+    background-color: var(--skill-box-bg);
+    border: 1px solid var(--skill-box-color);
+}
+
+
+/* =========================================
+   Mobile Layout (≤1279px)
+   Adjusts spacing and sizes for smaller screens
+========================================= */
+@media screen and (max-width: 1279px) {
+
+    /* Reduce padding in lists */
+    .expViewContainer ul {
+        padding: 1em;
+    }
+
+    /* Narrower container for mobile */
+    .expContainer {
+        width: 470px;
+    }
+
+    /* Slightly larger text for readability */
+    .expContainerLeft {
+        font-size: 1.45em;
+    }
+
+    /* Slightly smaller content text */
+    .contentDiv{
+        font-size: .95em;
+    }
+
+    /* Extra spacing below expanded view */
+    .expViewContainer{
+        margin-bottom: 30px;
+    }
+
+    /* Smaller skill tags */
+    .skillUsed span {
+        font-size: .7em;
+    }
+}
+
+
+/* =========================================
+   Desktop Layout (≥1280px)
+========================================= */
+@media screen and (min-width: 1280px) {
+
+    /* More padding for lists on larger screens */
+    .expViewContainer ul {
+        padding-left: 2em;
+    }
+
+    /* Wider container for desktop layout */
+    .expContainer {
+        width: 600px;
+    }
+}
+
+
+/* =========================================
+   Tabs (Experience Filters)
+   Used to switch between categories
+========================================= */
+.tabContainer {
+    display: flex;
+    justify-content: flex-start;
+
+    margin-top: var(--normal-margin-top);
+
+    /* Fade in when loaded */
+    animation: fadeIn2 var(--normal-transition-time) ease;
+}
+
+/* Individual tab styling */
+.tab {
+    display: inline-block;
+
+    padding: 6px 6px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+
+    border-radius: 5px;
+
+    font-size: var(--fsize-mid);
+
+    cursor: pointer;
+
+    transition: all var(--base-transition-time) ease;
+
+    color: var(--text-color-dark);
+    opacity: 0.7;
+
+    background-color: var(--secondary-color);
+}
+
+/* Hover effect for tabs */
+.tab:hover {
+    opacity: 1;
+}
+
+/* Active (selected) tab */
+.activeTab {
+    opacity: 0.9;
+    background-color: var(--text-color-dark);
+    color: #000; /* var(--primary-color); */
+}
+
+/* Hover state for active tab */
+.activeTab:hover {
+    background-color: var(--text-color-dark);
+    color: var(--primary-color);
+}
+
+
+/* =========================================
+   Experience Container Spacing Adjustment
+========================================= */
+
+/* Removes extra margin if needed */
+.expViewContainer {
+    margin-top: 0;
+}

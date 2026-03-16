@@ -1,0 +1,264 @@
+/* ======================================================
+   PAGER / MAIN FOCUS
+   ====================================================== */
+
+/* Remove focus outline from main pager container */
+.pagerMainDiv:focus {
+    outline: none;
+}
+
+
+/* ======================================================
+   NAVBAR
+   ====================================================== */
+
+/* Navbar container */
+.navBar {
+    display: flex;
+    justify-content: space-between; /* Logo left, nav items right */
+    align-items: center;            /* Vertically center items */
+    z-index: 10;
+    top: 0;
+    font-size: large;
+    padding: 1em 2em;
+}
+
+/* Navbar items (spans) */
+.navBar span {
+    cursor: pointer;
+    font-size: var(--fsize-mid);
+    transition: color var(--base-transition-time) ease;
+}
+
+/* Navbar item hover effect */
+.navBar span:hover {
+    color: var(--hover-color);
+}
+
+
+/* Arrow button container (next/prev navigation) */
+.arrowContainer {
+    display: flex;
+    align-items: center;
+}
+
+/* Left and right arrow button elements */
+.leftButton em,
+.rightButton em {
+    display: block;
+    height: 36px;
+    width: 50px;
+    position: absolute;
+    top: 0;
+}
+
+/* Left and right arrow buttons */
+.leftButton,
+.rightButton {
+    width: 36px;
+    height: 50px;
+    margin-left: 30px;
+    cursor: pointer;
+}
+
+/* Arrow pseudo-elements for the lines forming the arrow shape */
+.leftButton em::after, 
+.rightButton em::after,
+.leftButton em::before,
+.rightButton em::before {
+    content: " ";
+    position: absolute;
+    height: 100%;
+    width: 8px;
+    border-radius: 10px;
+    background-color: var(--text-color-dark);
+    margin-left: 10px;
+    margin-right: 10px;
+    transition: all var(--base-transition-time) ease;
+}
+
+/* Position before and after pseudo-elements for rotation */
+.leftButton em::before,
+.rightButton em::before { top: 50%; }
+.leftButton em::after, 
+.rightButton em::after { bottom: -91%; }
+
+/* Arrow rotations */
+.rightButton em::before { transform: rotate(-60deg); }
+.rightButton em::after  { transform: rotate(-120deg); }
+.leftButton em::before  { transform: rotate(60deg); }
+.leftButton em::after   { transform: rotate(120deg); }
+
+
+/* ======================================================
+   PAGER BODY
+   ====================================================== */
+
+.pagerBody {
+    position: relative;
+    display: flex;
+}
+
+.pagerContent {
+    margin: 0 auto;
+    overflow-x: auto; /* Horizontal scrolling */
+}
+
+/* Sections inside pager content */
+.pagerContent section {
+    margin-bottom: 50px;
+}
+
+
+/* ======================================================
+   CONTENT DIVS / LISTS
+   ====================================================== */
+
+.contentDiv { margin-left: 10px; }
+
+.contentDivLi {
+    list-style: none;           /* Remove bullets */
+    margin-top: 10px;
+    margin-left: 0;
+    font-size: var(--fsize-smol);
+    white-space: pre-wrap;      /* Preserve line breaks */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.contentDiv a {
+    text-decoration: none;
+    color: var(--link-color);
+}
+
+.contentDiv a:visited { color: var(--visited-color); }
+
+.contentDivLi ul {
+    margin-left: 10px;
+    padding: 0;
+}
+
+
+/* ======================================================
+   PROJECT LINKS
+   ====================================================== */
+
+.projectLinks,
+.projectLinksDiv,
+.projectLinksDivDemo {
+    display: inline-flex;
+    vertical-align: bottom;
+    align-items: flex-end;
+    margin-left: 10px;
+    gap: 10px; /* Space between icons/links */
+}
+
+/* Icons inside project links */
+.projectLinksDiv img, 
+.projectLinksDiv svg,
+.projectLinksDivDemo img, 
+.projectLinksDivDemo svg {
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    transition: all var(--base-transition-time) ease;
+    fill: var(--sub-text-color);
+    z-index: 10000;
+}
+
+/* Hover effects for project icons */
+.projectLinksDiv img:hover, 
+.projectLinksDiv svg:hover,
+.projectLinksDivDemo img:hover, 
+.projectLinksDivDemo svg:hover {
+    fill: var(--text-color-dark);
+    filter: drop-shadow(0px 0px 10px var(--hover-color));
+}
+
+/* SVG paths inherit stroke color */
+.projectLinksDiv svg path,
+div.projectLinksDivDemo svg path { stroke: inherit; }
+
+
+/* ======================================================
+   SKILLS CONTAINER
+   ====================================================== */
+
+.skillsContainer {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap; /* Wrap skill boxes on smaller screens */
+}
+
+.skillsContainer span {
+    display: inline;
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    padding: 5px 7px;
+    font-size: var(--fsize-smol);
+    background-color: var(--skill-box-bg);
+    color: var(--skill-box-color);
+    border: 2px solid var(--skill-box-color);
+}
+
+
+/* ======================================================
+   HOVER EFFECTS FOR ARROWS (DESKTOP ONLY)
+   ====================================================== */
+
+@media (hover: hover) and (pointer: fine) {
+    .leftButton:hover em::before,
+    .rightButton:hover em::before,
+    .leftButton:hover em::after,
+    .rightButton:hover em::after {
+        background-color: var(--hover-color);
+    }
+
+    /* Adjust arrow positions on hover */
+    .leftButton:hover em::before,
+    .rightButton:hover em::before { top: 30%; }
+    .leftButton:hover em::after,
+    .rightButton:hover em::after { bottom: -104%; }
+
+    /* Rotate arrows on hover for animation effect */
+    .leftButton:hover em::before { transform: rotate(25deg); }
+    .leftButton:hover em::after  { transform: rotate(155deg); }
+    .rightButton:hover em::before { transform: rotate(-25deg); }
+    .rightButton:hover em::after  { transform: rotate(-155deg); }
+}
+
+
+/* ======================================================
+   RESPONSIVE WIDTHS
+   ====================================================== */
+
+/* Smaller screens */
+@media screen and (max-width: 1279px) {
+    .pagerContent { width: 80vw; }
+}
+
+/* Desktop / large screens */
+@media screen and (min-width: 1280px) {
+    .pagerContent { width: 55vw; }
+}
+
+
+/* ======================================================
+   ANIMATION FOR CONTENT
+   ====================================================== */
+
+.pagerContent article {
+    animation: slideInTitle var(--normal-transition-time) ease;
+}
+
+@keyframes slideInTitle {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translate3d(0);
+    }
+}

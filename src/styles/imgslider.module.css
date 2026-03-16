@@ -1,0 +1,199 @@
+/* ======================================================
+   IMAGE SLIDER CONTAINER
+   ====================================================== */
+
+/* Main wrapper for the entire image slider component */
+.imgSliderContainer{
+    width: fit-content;
+    position: relative;
+
+    margin-top: 1em;
+    margin-bottom: 2em;
+
+    display: flex;
+    flex-direction: column;
+
+    /* Optional border (currently disabled) */
+    border: 2px solid var(--not-select);
+    border: none;
+}
+
+
+/* ======================================================
+   IMAGE DISPLAY AREA
+   ====================================================== */
+
+/* Sub container that holds the image/video and overlay controls */
+.Images{
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 5px;
+    overflow: hidden;
+
+    width: var(--image-width);
+    height: var(--image-height);
+
+    border: none;
+
+    /* Optional shadow effect (disabled) */
+    /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); */
+}
+
+
+/* ======================================================
+   NAVIGATION OVERLAY BUTTONS
+   ====================================================== */
+
+/* Shared styling for left and right navigation buttons */
+.leftButton, 
+.rightButton {
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+
+    cursor: pointer;
+
+    /* Covers 1/3 of the image height for easier clicking */
+    height: 33.33%;
+
+    /* Hidden by default, appears on hover */
+    opacity: 0;
+
+    transition: opacity var(--base-transition-time) ease-out 0s;
+}
+
+/* Left navigation button */
+.leftButton {
+    left: 0;
+
+    padding-left: 1em;
+    padding-right: 10%;
+
+    /* Gradient overlay effect */
+    background-image: linear-gradient(
+        to left,
+        rgba(0, 0, 0, 0),
+        var(--overlay-color)
+    );
+}
+
+/* Right navigation button */
+.rightButton{
+    right: 0;
+
+    padding-right: 1em;
+    padding-left: 10%;
+
+    /* Gradient overlay effect */
+    background-image: linear-gradient(
+        to right,
+        rgba(0, 0, 0, 0),
+        var(--overlay-color)
+    );
+}
+
+
+/* ======================================================
+   ARROW INDICATORS (CSS TRIANGLES)
+   ====================================================== */
+
+/* Base triangle shape using borders */
+.rightButton span,
+.leftButton span {
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+}
+
+
+/* ======================================================
+   HOVER INTERACTIONS (DESKTOP ONLY)
+   ====================================================== */
+
+/* Apply hover effects only for devices that support hover */
+@media (hover: hover) and (pointer: fine){
+
+    /* Reveal navigation buttons on hover */
+    .leftButton:hover,
+    .rightButton:hover {
+        opacity: 1;
+    }
+
+    /* Left arrow appearance */
+    .leftButton:hover span{
+        border-right: 15px solid rgb(0, 0, 0,0.3);
+    }
+
+    /* Right arrow appearance */
+    .rightButton:hover span{
+        border-left: 15px solid rgb(0, 0, 0,0.3);
+    }
+}
+
+
+/* ======================================================
+   IMAGE SELECTOR DOTS
+   ====================================================== */
+
+/* Container for navigation dots */
+.selectImage{
+    margin-top: 10px;
+
+    display: flex;
+    justify-content: center;
+}
+
+/* Wrapper for each dot */
+.selectImage span {
+    padding-left: 5px;
+
+    transition: all var(--base-transition-time) ease;
+}
+
+/* Dot appearance */
+.dotMarker {
+    width: 10px;
+    height: 10px;
+
+    opacity: 0.3;
+
+    background-color: var(--sub-text-color);
+
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 16px;
+
+    border-radius: 50%;
+}
+
+/* Hover interaction for dots */
+.selectImage span:hover{
+    transform: scale(1.2);
+    opacity: 0.6;
+}
+
+/* Active/selected image indicator */
+.selectedPoint {
+    transform: scale(1.5);
+    opacity: 0.7;
+}
+
+
+/* ======================================================
+   VIDEO PLAYER
+   ====================================================== */
+
+/* Ensures videos behave like images inside the slider */
+.videoPlayer {
+    width: 100%;
+    height: 100%;
+
+    /* Forces the video to fully cover the container */
+    object-fit: cover;
+
+    display: block;
+}

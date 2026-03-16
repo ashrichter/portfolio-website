@@ -1,0 +1,115 @@
+/* ======================================================
+   LOGO DIV
+   ====================================================== */
+
+/* Container for logo */
+.logoDiv {
+    width: var(--fsize-large);          /* Set logo width */
+    height: var(--fsize-large);         /* Set logo height */
+    transition: all var(--base-transition-time) ease; /* Smooth hover transitions */
+}
+
+/* Logo SVG styling */
+.logoDiv svg {
+    fill: var(--sub-text-color);        /* Initial SVG color */
+    transition: fill var(--base-transition-time) ease; /* Smooth color change */
+}
+
+/* Change SVG color on hover */
+.logoDiv:hover svg {
+    fill: var(--text-color-dark);
+}
+
+/* Hover effect for logo container */
+.logoDiv:hover {
+    filter: drop-shadow(0px 0px 10px var(--hover-color)); /* Subtle glow */
+    transform: translateY(-3px);                             /* Lift effect */
+}
+
+
+/* ======================================================
+   SIDEBAR DIV
+   ====================================================== */
+
+/* Sidebar list container */
+.sidebarDiv ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;  /* Remove default bullets */
+    position: absolute;
+    bottom: 0;
+}
+
+/* Sidebar list items */
+.sidebarDiv li {
+    list-style-type: none; /* Remove any bullets */
+}
+
+
+/* ======================================================
+   MOBILE / TABLET STYLES
+   ====================================================== */
+@media screen and (max-width: 1279px) {
+
+    /* Sidebar position on smaller screens */
+    .sidebarDiv {
+        left: 0;
+        bottom: 0;
+        position: fixed;   /* Stick to bottom-left */
+        margin-bottom: 0.7em;
+    }
+
+    /* Display menu items horizontally */
+    .sidebarDiv ul {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    /* Adjust spacing between list items */
+    .sidebarDiv li {
+        float: left;
+        margin-left: 1.5em;
+    }
+}
+
+
+/* ======================================================
+   DESKTOP / LARGE SCREENS
+   ====================================================== */
+@media screen and (min-width: 1280px) {
+
+    /* Fixed vertical sidebar on large screens */
+    .sidebarDiv {
+        position: fixed;
+        left: 0;
+        top: 0;
+        box-sizing: border-box;
+        height: 100%;      /* Fill height */
+    }
+
+    /* Vertical line separator after the menu */
+    .sidebarDiv ul::after {
+        opacity: 0.69;
+        content: "";
+        background-color: var(--sub-text-color);
+        display: block;
+        width: 1px;
+        margin: 30px auto;
+        margin-bottom: 0;
+        height: var(--normal-margin-top);
+    }
+
+    /* Sidebar padding for menu items */
+    .sidebarDiv ul {
+        padding-left: 3em;
+    }
+
+    /* Spacing between menu items vertically */
+    .sidebarDiv li {
+        margin-left: 0;
+        margin-top: 2em;
+    }
+}

@@ -1,0 +1,106 @@
+/* ======================================================
+   MENU CONTAINER
+   ====================================================== */
+
+/* Main container for the navigation menu */
+.menudiv {
+    position: absolute; /* Positioned relative to parent */
+    bottom: 0;          /* Align menu to bottom of container */
+}
+
+
+/* ======================================================
+   MENU LIST STRUCTURE
+   ====================================================== */
+
+/* Unordered list holding the menu items */
+.menudiv ul {
+    list-style: none;          /* Remove default bullet points */
+
+    display: flex;
+    flex-direction: column;    /* Stack items vertically */
+
+    align-items: flex-start;   /* Align items to the left */
+}
+
+/* Individual menu items */
+.menudiv li{
+    opacity: 0.9;
+
+    color: var(--sub-text-color);
+    font-size: var(--fsize-mid);
+
+    padding: 4px;
+
+    /* Smooth hover and movement transitions */
+    transition: color var(--normal-transition-time) ease,
+                transform var(--base-transition-time) ease;
+
+    cursor: pointer;
+}
+
+
+/* ======================================================
+   LINK STYLING
+   ====================================================== */
+
+/* Remove default link styling */
+.menudiv a{
+    text-decoration: none;
+    color: inherit; /* Inherit color from parent li */
+}
+
+/* Prevent visited links changing color */
+.menudiv a:visited{
+    color: inherit;
+}
+
+
+/* ======================================================
+   ACTIVE / SELECTED MENU ITEM
+   ====================================================== */
+
+/* Highlight the currently selected menu option */
+.menudiv .selectedoption {
+    opacity: 1;
+    color: var(--text-color);
+    font-weight: bold;
+
+    /* Slight horizontal shift to indicate selection */
+    transform: translateX(-6px);
+}
+
+
+/* ======================================================
+   HOVER EFFECT
+   ====================================================== */
+
+/* Hover effect for menu items */
+.menudiv .menuitem:hover {
+    color: var(--text-color-dark);
+}
+
+
+/* ======================================================
+   RESPONSIVE DESIGN
+   ====================================================== */
+
+/* Mobile / tablet layout */
+@media screen and (max-width: 1279px) {
+
+    .menudiv {
+        right: 1em;        /* Position menu closer to screen edge */
+        padding-bottom: 2em;
+    }
+    
+}
+
+/* Desktop layout */
+@media screen and (min-width: 1280px) {
+
+    .menudiv {
+        right: 10%;        /* Move menu inward for wider screens */
+        padding-bottom: 5%;
+    }
+
+}

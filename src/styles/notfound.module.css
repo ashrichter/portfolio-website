@@ -1,0 +1,73 @@
+/* ======================================================
+   MAIN CONTAINER
+   ====================================================== */
+
+/* Centers all content both vertically and horizontally on the page */
+.container {
+    display: flex;
+    justify-content: center; /* Horizontal centering */
+    align-items: center;     /* Vertical centering */
+    flex-direction: column;  /* Stack children vertically */
+    text-align: center;      /* Center text content */
+
+    height: 100vh;           /* Full viewport height */
+
+    /* Fade-in animation on load */
+    animation: fadeIn 0.4s ease;
+}
+
+
+/* ======================================================
+   MAIN TITLE
+   ====================================================== */
+
+/* Large heading text */
+.title {
+    font-size: 2.5rem;  /* Prominent main title size */
+    margin-bottom: 10px; /* Space below the title */
+}
+
+
+/* ======================================================
+   SUBTITLE
+   ====================================================== */
+
+/* Smaller supporting text under the main title */
+.subtitle {
+    margin-top: 20px;      /* Space above the subtitle */
+    font-size: 1.2rem;     /* Slightly smaller font */
+}
+
+
+/* ======================================================
+   LINKS
+   ====================================================== */
+
+/* Styling for inline links */
+.link {
+    text-decoration: none;    /* Remove default underline */
+    color: var(--tag-color);  /* Use site-specific color */
+    transition: color 0.2s ease; /* Smooth color transition on hover */
+}
+
+/* Hover effect for links */
+.link:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+
+/* ======================================================
+   ANIMATIONS
+   ====================================================== */
+
+/* Simple fade-in animation from slightly above */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px); /* Start slightly above */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);     /* Move to final position */
+    }
+}
