@@ -4,6 +4,7 @@ import ImageSlider from "@/components/_projectpage/imageslider";
 import styles from "@/styles/pager.module.css";
 import Markdown from "react-markdown";
 import ProjectLinks from "@/components/_projectpage/projectlinks";
+import ThemeToggle from "@/components/themetoggle";
 
 // Pager component displays a full project page including:
 // - project info
@@ -81,35 +82,34 @@ export default function Pager(props: {
             {/* Top navigation bar */}
             <div className={styles.navBar}>
 
-                {/* Button to exit the project page */}
-                <span onClick={() => goToDir("e")}>Go Back</span>
+    {/* Left side */}
+    <span onClick={() => goToDir("e")}>Go Back</span>
 
-                {/* Container for project navigation arrows */}
-                <div className={styles.arrowContainer}>
+    {/* Right side */}
+    <div className={styles.navRight}>
+    {/* Theme toggle stays fixed */}
+    <ThemeToggle />
 
-                    {/* Left arrow (previous project) */}
-                    <div
-                        className={styles.leftButton}
-                        onClick={() => {
-                            goToDir("l");
-                        }}
-                    >
-                        {/* Only show arrow if a previous project exists */}
-                        {left !== null && <em></em>}
-                    </div>
+    {/* Arrows */}
+    <div className={styles.arrowContainer}>
+  {/* Left arrow */}
+  <div
+    className={`${styles.leftButton} ${left === null ? styles.hiddenArrow : ""}`}
+    onClick={() => left !== null && goToDir("l")}
+  >
+    <em></em>
+  </div>
 
-                    {/* Right arrow (next project) */}
-                    <div
-                        className={styles.rightButton}
-                        onClick={() => {
-                            goToDir("r");
-                        }}
-                    >
-                        {/* Only show arrow if a next project exists */}
-                        {right != null && <em></em>}
-                    </div>
-                </div>
-            </div>
+  {/* Right arrow */}
+  <div
+    className={`${styles.rightButton} ${right === null ? styles.hiddenArrow : ""}`}
+    onClick={() => right !== null && goToDir("r")}
+  >
+    <em></em>
+  </div>
+</div>
+</div>
+</div>
 
             {/* Main page body */}
             <div className={styles.pagerBody}>

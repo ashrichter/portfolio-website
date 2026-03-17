@@ -2,76 +2,67 @@
    FILTER TAGS
    ====================================================== */
 
-/* Container for all filter tags */
-.filterTags {
-    margin: 1em 1em; /* Space around the filter tags */
+   .filterTags {
+    margin: 1em 1em;
+    background: var(--primary-color);
 }
 
-/* Individual tag styling */
 .filterTags span {
     display: inline-block;
-
     color: var(--text-color-dark);
-    opacity: 0.7;                 /* Slightly faded by default */
+    opacity: 0.7;
     background-color: var(--secondary-color);
-
-    padding: 6px 6px;             /* Padding inside tag */
-    margin-right: 10px;           /* Space between tags horizontally */
-    margin-bottom: 10px;          /* Space between rows */
+    padding: 6px 6px;
+    margin-right: 10px;
+    margin-bottom: 10px;
     border-radius: 5px;
-
     font-size: var(--fsize-smol);
-    cursor: pointer;              /* Pointer on hover */
-    transition: all var(--base-transition-time) ease; /* Smooth hover effect */
+    cursor: pointer;
+    transition: all var(--base-transition-time) ease;
 }
 
-/* Hover effect for filter tags */
 .filterTags span:hover {
-    opacity: 1; /* Fully visible when hovered */
+    opacity: 1;
 }
 
-/* Active filter tag styling */
 .filterTags .activeTag {
-    opacity: 0.9;                   /* Slightly more opaque */
-    background-color: var(--text-color-dark); /* Dark background for active tag */
-    color: #000;                     /* Text color for contrast */
+    opacity: 0.9;
+    background-color: var(--text-color-dark);
+    color: #000;
 }
 
-/* Hover effect for active filter tag */
 .filterTags .activeTag:hover {
     background-color: var(--text-color-dark);
-    color: var(--primary-color);     /* Highlight text on hover */
+    color: var(--primary-color);
 }
-
 
 /* ======================================================
    MAIN PROJECT CONTAINER
    ====================================================== */
 
-/* Wrapper around all projects */
 .projectMainDiv {
     margin: 1em;
     padding-bottom: 30px;
-    transition: all var(--normal-transition-time) ease; /* Smooth transitions for layout changes */
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    transition: background-color var(--normal-transition-time) ease;
 }
-
 
 /* ======================================================
    PROJECTS GRID
    ====================================================== */
 
-/* Layout grid for projects */
 .projectsGrid {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr)); /* Responsive column sizing */
-    justify-items: center; /* Center each project in its grid cell */
-    gap: 10px;             /* Space between grid items */
+    grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+    justify-items: center;
+    gap: 10px;
+    background: var(--primary-color);
 }
 
-/* Responsive adjustment for smaller screens */
 @media screen and (max-width: 1079px) {
     .projectsGrid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Smaller columns for mobile */
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
 }

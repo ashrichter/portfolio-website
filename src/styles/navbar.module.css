@@ -53,6 +53,20 @@
     color: var(--hover-color);
 }
 
+/* =========================================
+   Navbar Right Section
+   Contains theme toggle and navigation link
+========================================= */
+
+.navright {
+
+    display: flex;
+    align-items: center;
+  
+    gap: 1rem;
+  
+  }
+
 
 /* ======================================================
    RESPONSIVE ADJUSTMENT

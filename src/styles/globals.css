@@ -1,38 +1,25 @@
 /* =========================================
    Global CSS Variables
-   These define the core design system
-   (spacing, colors, font sizes, animations)
 ========================================= */
 :root {
-
-  /* Animation / transition timings */
   --base-transition-time: 0.3s;
   --normal-transition-time: 0.7s;
   --smooth-transition-time: 1s;
 
-  /* Section spacing */
   --max-margin-top: 20vh;
   --normal-margin-top: 15vh;
   --min-margin-top: 10vh;
 
-  /* Main page padding */
   --main-div-padding-left: 10vw;
   --main-div-padding-right: 5vw;
 
-  /* List item spacing */
   --li-padding: 5px;
 
-  /* Default project image sizes */
   --image-width: 55vw;
   --image-height: 30vw;
-
-  /* Smaller image dimensions */
   --image-width-small: 500px;
   --image-height-small: 300px;
 
-  /* =========================================
-     Font Sizes
-  ========================================= */
   --fsize-xsmol: .75em;
   --fsize-smol: .95em;
   --fsize-about: 1.04em;
@@ -40,47 +27,105 @@
   --fsize-large: 1.95em;
   --fsize-xlarge: 2.45em;
 
-  /* =========================================
-     Color Palette
-  ========================================= */
-
-  /* Main background */
+  /* DARK THEME */
   --primary-color: #2E3440;
-
-  /* Overlay elements (cards, hover layers) */
   --overlay-color:  #3b4252c8;
-
-  /* Secondary backgrounds */
   --secondary-color: #4C566A;
-
-  /* Text colors */
   --sub-text-color: #929AAA;
   --text-color-dark: #D8DEE9;
   --text-color: #ECEFF4;
-
-  /* Skill tag styling */
   --skill-box-color: #A3BE8C;
   --skill-box-bg: rgba(83, 110, 60, 0.1);
-
-  /* Alternate skill style (currently unused) */
-  /* --skill-box-color: #D8DEE9;  */
-  /* --skill-box-bg: rgba(156, 159, 164, 0.1); */
-
-  /* Accent / interaction colors */
   --highlight-color: #4C566A;
   --hover-color: #88C0D0;
-
-  /* Link colors */
   --link-color: #81A1C1;
   --visited-color: #B48EAD;
-
-  /* Tag highlight color */
   --tag-color: #b7d89a;
 }
 
+/* =========================================
+   Light Theme Override
+========================================= */
+html.light-theme {
+  --primary-color: #ECEFF4;
+  --overlay-color: #e5e9f0cc;
+  --secondary-color: #D8DEE9;
+  --sub-text-color: #4C566A;
+  --text-color-dark: #2E3440;
+  --text-color: #2E3440;
+  --skill-box-color: #5E81AC;
+  --skill-box-bg: rgba(94,129,172,0.1);
+  --highlight-color: #E5E9F0;
+  --hover-color: #5E81AC;
+  --link-color: #5E81AC;
+  --visited-color: #B48EAD;
+}
 
 /* =========================================
-   Inline Code Styling
+   BASE PAGE STRUCTURE (FINAL FIX)
+========================================= */
+/* Hide content until theme is applied */
+html {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+html[data-theme-applied] {
+  opacity: 1;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+/* Layout structure */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Wrapper from layout.tsx */
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+/* Main content expands */
+main {
+  flex: 1;
+  width: 100%;
+  background-color: var(--primary-color);
+  color: var(--text-color);
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+footer {
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  margin-top: auto;
+}
+
+/* =========================================
+   GLOBAL TRANSITIONS (SAFE)
+========================================= */
+body, main, .page-wrapper {
+  transition: background-color var(--normal-transition-time) ease,
+              color var(--normal-transition-time) ease;
+}
+
+/* =========================================
+   Inline Code
 ========================================= */
 code {
   background-color: var(--secondary-color);
@@ -90,67 +135,25 @@ code {
   border-radius: 3px;
 }
 
-
-/* =========================================
-   Small Text
-========================================= */
+/* Small text */
 small {
   padding-bottom: 10px;
   font-size: var(--fsize-xsmol);
 }
 
+/* Links */
+a { color: var(--link-color); }
+a:visited { color: var(--visited-color); }
 
-/* =========================================
-   Link Styling
-========================================= */
-a {
-  color: var(--link-color);
-}
-
-/* Visited link color */
-a:visited {
-  color: var(--visited-color);
-}
-
-
-/* =========================================
-   Blockquote Styling
-   Used for quoted text in markdown
-========================================= */
+/* Blockquotes */
 blockquote {
   border-left: 4px solid var(--sub-text-color);
   padding: 0 1em;
-  margin: 0;
-  margin-bottom: 1em;
+  margin: 0 0 1em 0;
 }
+blockquote p { color: var(--sub-text-color); }
 
-blockquote p {
-  /* font-style: italic; */
-  color: var(--sub-text-color);
-}
-
-
-/* =========================================
-   Base Page Layout
-========================================= */
-html, body {
-  padding: 0;
-  margin: 0;
-
-  background-color: var(--primary-color);
-  color: var(--text-color);
-
-  width: 100%;
-  height: 100%;
-
-  /* overflow: hidden; prevents scrollbars */
-  /* box-sizing: border-box; */
-}
-
-
-/* =========================================
-   Horizontal Divider Styling
-========================================= */
+/* Divider */
 hr {
   border: none;
   height: 1px;
@@ -158,31 +161,35 @@ hr {
   opacity: 0.2;
 }
 
+/* =========================================
+   Scrollbar
+========================================= */
+::-webkit-scrollbar { width: 8px; background-color: transparent; }
+
+::-webkit-scrollbar-thumb {
+  background: var(--secondary-color);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--sub-text-color);
+}
+
+::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-track-piece { background-color: transparent; }
 
 /* =========================================
-   Mobile Responsive Adjustments
-   Applies to screens smaller than 1280px
+   Mobile
 ========================================= */
 @media screen and (max-width: 1279px) {
-
   :root {
-
-    /* Reduce side padding on smaller screens */
     --main-div-padding-left: 5vw;
     --main-div-padding-right: 2vw;
-
-    /* Smaller list spacing */
     --li-padding: 3px;
-
-    /* Larger relative image sizes for mobile */
     --image-width: 80vw;
     --image-height: 50vw;
-
-    /* Smaller fixed image sizes */
     --image-width-small: 300px;
     --image-height-small: 180px;
-
-    /* Reduced font sizes for smaller screens */
     --fsize-xsmol: .5em;
     --fsize-smol: .8em;
     --fsize-about: .9em;
@@ -190,56 +197,8 @@ hr {
     --fsize-large: 1.5em;
     --fsize-xlarge: 2em;
   }
-
 }
 
-
-/* =========================================
-   Short Screen Height Adjustment
-   Reduces spacing for small displays
-========================================= */
 @media screen and (max-height: 700px) {
-  :root {
-    --min-margin-top: 1vh;
-  }
-}
-
-
-/* =========================================
-   Custom Scrollbar Styling (WebKit)
-   Works in Chrome, Edge, Safari
-========================================= */
-
-/* Scrollbar width */
-::-webkit-scrollbar {
-  width: 8px;
-  background-color: transparent;
-}
-
-/* Scrollbar thumb (draggable part) */
-::-webkit-scrollbar-thumb {
-  background: var(--secondary-color);
-  border-radius: 10px;
-}
-
-/* Hover effect for scrollbar thumb */
-::-webkit-scrollbar-thumb:hover {
-  background: var(--sub-text-color);
-}
-
-/* Scrollbar corner (bottom-right intersection) */
-::-webkit-scrollbar-corner {
-  background: transparent;
-}
-
-/* Scrollbar track background */
-::-webkit-scrollbar-track-piece {
-  background-color: transparent;
-}
-
-/* Additional thumb styling */
-::-webkit-scrollbar-thumb-piece {
-  background-color: var(--secondary-color);
-  border-radius: 10px;
-  transition: background-color var(--base-transition-time) ease-in-out;
+  :root { --min-margin-top: 1vh; }
 }

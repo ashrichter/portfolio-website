@@ -1,0 +1,66 @@
+/* =========================================
+   Theme Toggle Button
+   - Simple circle
+   - Hover scale effect
+========================================= */
+.toggle {
+    width: 1.6rem;
+    height: 1.6rem;
+    border-radius: 50%;
+    border: none;
+  
+    /* Default state */
+    background: var(--text-color);
+  
+    cursor: pointer;
+  
+    /* Remove scale, add smooth colour transition */
+    transition: background-color var(--base-transition-time) ease;
+  }
+  
+  .toggle:hover {
+    /* 👇 This matches your navbar hover blue */
+    background-color: var(--hover-color);
+  }
+  
+  /* =========================================
+     Blender Circle Overlay
+     - Expands/collapses from button
+     - Covers viewport with smooth animation
+  ========================================= */
+  .blender {
+    position: fixed;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 50;
+    background: var(--primary-color);
+  
+    /* Center at coordinates using translate */
+    transform: translate(-50%, -50%) scale(0);
+    transform-origin: center;
+  
+    transition: background var(--smooth-transition-time) ease;
+  }
+  
+  /* Expand animation */
+  .expand {
+    animation: expandCircle 0.4s ease forwards;
+  }
+  
+  /* Collapse animation */
+  .collapse {
+    animation: collapseCircle 0.4s ease forwards;
+  }
+  
+  /* Keyframes */
+  @keyframes expandCircle {
+    from { transform: translate(-50%, -50%) scale(0); }
+    to { transform: translate(-50%, -50%) scale(80); } /* covers viewport */
+  }
+  
+  @keyframes collapseCircle {
+    from { transform: translate(-50%, -50%) scale(80); }
+    to { transform: translate(-50%, -50%) scale(0); }
+  }

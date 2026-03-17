@@ -30,30 +30,20 @@
      WAVE ELEMENT
      ====================================================== */
   
-  /* Individual animated bar used to create the wave effect */
-  .wave {
-    width: 10px;
-    height: 10px;
-  
-    /* Nord "Frost" colour palette gradient */
-    background: linear-gradient(
-      45deg,
-      #8FBCBB,
-      #88C0D0,
-      #81A1C1,
-      #5E81AC
-    ); 
-  
-    margin: 10px;
-  
-    /* Continuous vertical animation */
-    animation: wave var(--smooth-transition-time) linear infinite;
-  
-    /* Rounded ends for a smoother visual */
-    border-radius: 20px;
-  
-    opacity: 1;
-  }
+     .wave {
+      width: 10px;
+      height: 10px;
+    
+      /* USES THEME COLORS */
+      background: var(--hover-color);
+    
+      margin: 10px;
+    
+      animation: wave var(--smooth-transition-time) linear infinite;
+    
+      border-radius: 20px;
+      opacity: 1;
+    }
   
   
   /* ======================================================

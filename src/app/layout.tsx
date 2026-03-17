@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Mono as PageFont } from "next/font/google";
-import { GoogleAnalytics } from '@next/third-parties/google';
 
 import "@/styles/globals.css";
 
-const pagefont = PageFont({ // Load font with latin character support
-  subsets: ['latin'],
+const pagefont = PageFont({
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
@@ -13,7 +12,7 @@ export const metadata: Metadata = {
   description: "Personal Portfolio Website",
 };
 
-export default function RootLayout({ // Whatever page is being rendered becomes children
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -22,10 +21,34 @@ export default function RootLayout({ // Whatever page is being rendered becomes 
     <html lang="en">
       <head>
         <link rel="icon" href="/svgs/favicon.svg" type="image/svg+xml" />
-        {/* <GoogleAnalytics gaId="" /> */}
+
+        {/* ✅ APPLY THEME BEFORE RENDER */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function () {
+                try {
+                  const savedTheme = localStorage.getItem("theme");
+                  const root = document.documentElement;
+
+                  if (savedTheme === "light") {
+                    root.classList.add("light-theme");
+                  } else {
+                    root.classList.remove("light-theme");
+                  }
+
+                  root.setAttribute("data-theme-applied", "true");
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
       </head>
+
       <body className={pagefont.className}>
-        {children}
+        <div className="page-wrapper">
+          <main>{children}</main>
+        </div>
       </body>
     </html>
   );
