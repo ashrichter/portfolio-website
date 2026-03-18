@@ -1,44 +1,29 @@
-/* =========================================
-   Theme Toggle Button
-   - Simple circle
-   - Hover scale effect
-========================================= */
-.toggle {
-    width: 1.6rem;
-    height: 1.6rem;
-    border-radius: 50%;
-    border: none;
-  
-    /* Default state */
-    background: var(--text-color);
-  
-    cursor: pointer;
-  
-    /* Remove scale, add smooth colour transition */
-    transition: background-color var(--base-transition-time) ease;
-  }
-  
-  .toggle:hover {
-    /* 👇 This matches your navbar hover blue */
-    background-color: var(--hover-color);
-  }
-  
-  /* =========================================
-     Blender Circle Overlay
-     - Expands/collapses from button
-     - Covers viewport with smooth animation
-  ========================================= */
-  .blender {
-    position: fixed;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 50;
-    background: var(--primary-color);
-  
-    transform: translate(-50%, -50%) scale(0);
-    transform-origin: center;
-  
-    transition: transform 0.6s ease, background var(--smooth-transition-time) ease;
-  }
+.navToggleWrapper {
+  display: flex;
+  align-items: center;
+  color: var(--text-color); /* Ensures SVG inherits navbar link color */
+}
+
+.blender {
+  position: fixed;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 50;
+  background: var(--primary-color);
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: center;
+  transition: transform 0.6s ease, background var(--smooth-transition-time) ease;
+}
+
+.themeToggle {
+  width: 1.6rem;
+  height: 1.6rem;
+  cursor: pointer;
+  color: inherit;
+  transition: color var(--base-transition-time) ease, transform 0.3s ease;
+}
+
+.themeToggle:hover {
+  color: var(--hover-color);
+  /* transform: scale(1.1); */
+}

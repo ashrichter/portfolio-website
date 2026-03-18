@@ -1,5 +1,5 @@
 /* =========================================
-   Global CSS Variables
+Global CSS Variables
 ========================================= */
 :root {
   --base-transition-time: 0.3s;
@@ -12,7 +12,6 @@
 
   --main-div-padding-left: 10vw;
   --main-div-padding-right: 5vw;
-
   --li-padding: 5px;
 
   --image-width: 55vw;
@@ -29,7 +28,7 @@
 
   /* DARK THEME */
   --primary-color: #2E3440;
-  --overlay-color:  #3b4252c8;
+  --overlay-color: #3b4252c8;
   --secondary-color: #4C566A;
   --sub-text-color: #929AAA;
   --text-color-dark: #D8DEE9;
@@ -44,7 +43,7 @@
 }
 
 /* =========================================
-   Light Theme Override
+Light Theme Override
 ========================================= */
 html.light-theme {
   --primary-color: #ECEFF4;
@@ -62,20 +61,13 @@ html.light-theme {
 }
 
 /* =========================================
-   BASE PAGE STRUCTURE (FINAL FIX)
+Base Page Structure
 ========================================= */
-/* Hide content until theme is applied */
-/* html {
-  opacity: 0;
-  transition: opacity 0.2s ease;
-} */
-
 html[data-theme-applied] {
   opacity: 1;
 }
 
-html,
-body {
+html, body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -84,7 +76,6 @@ body {
   color: var(--text-color);
 }
 
-/* Layout structure */
 body {
   display: flex;
   flex-direction: column;
@@ -107,31 +98,24 @@ main {
   color: var(--text-color);
 }
 
-/* =========================================
-   FOOTER
-========================================= */
+/* Footer */
 footer {
   background-color: var(--primary-color);
   color: var(--text-color);
   margin-top: auto;
 }
 
-/* =========================================
-   GLOBAL TRANSITIONS (SAFE)
-========================================= */
+/* Global transitions */
 body, main, .page-wrapper {
   transition: background-color var(--normal-transition-time) ease,
               color var(--normal-transition-time) ease;
 }
 
-/* =========================================
-   Inline Code
-========================================= */
+/* Inline code */
 code {
   background-color: var(--secondary-color);
   color: var(--text-color-dark);
-  padding-left: 3px;
-  padding-right: 3px;
+  padding: 0 3px;
   border-radius: 3px;
 }
 
@@ -142,8 +126,12 @@ small {
 }
 
 /* Links */
-a { color: var(--link-color); }
-a:visited { color: var(--visited-color); }
+a {
+  color: var(--link-color);
+}
+a:visited {
+  color: var(--visited-color);
+}
 
 /* Blockquotes */
 blockquote {
@@ -151,7 +139,9 @@ blockquote {
   padding: 0 1em;
   margin: 0 0 1em 0;
 }
-blockquote p { color: var(--sub-text-color); }
+blockquote p {
+  color: var(--sub-text-color);
+}
 
 /* Divider */
 hr {
@@ -161,25 +151,25 @@ hr {
   opacity: 0.2;
 }
 
-/* =========================================
-   Scrollbar
-========================================= */
-::-webkit-scrollbar { width: 8px; background-color: transparent; }
-
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
 ::-webkit-scrollbar-thumb {
   background: var(--secondary-color);
   border-radius: 10px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: var(--sub-text-color);
 }
-
-::-webkit-scrollbar-corner { background: transparent; }
-::-webkit-scrollbar-track-piece { background-color: transparent; }
+::-webkit-scrollbar-corner,
+::-webkit-scrollbar-track-piece {
+  background-color: transparent;
+}
 
 /* =========================================
-   Mobile
+Mobile
 ========================================= */
 @media screen and (max-width: 1279px) {
   :root {
@@ -200,5 +190,7 @@ hr {
 }
 
 @media screen and (max-height: 700px) {
-  :root { --min-margin-top: 1vh; }
+  :root {
+    --min-margin-top: 1vh;
+  }
 }

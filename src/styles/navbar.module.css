@@ -66,7 +66,20 @@
     gap: 1rem;
   
   }
-
+  
+/* Navbar toggle styling to match links */
+.navbar .theme-toggle {
+    width: 1.6rem;
+    height: 1.6rem;
+    cursor: pointer;
+    color: var(--text-color); /* inherits navbar link color */
+    transition: color var(--base-transition-time) ease, transform 0.3s ease;
+  }
+  
+  .navbar .theme-toggle:hover {
+    color: var(--hover-color); /* matches navbar link hover */
+    transform: scale(1.1);
+  }
 
 /* ======================================================
    RESPONSIVE ADJUSTMENT
