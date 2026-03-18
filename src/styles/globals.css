@@ -65,10 +65,10 @@ html.light-theme {
    BASE PAGE STRUCTURE (FINAL FIX)
 ========================================= */
 /* Hide content until theme is applied */
-html {
+/* html {
   opacity: 0;
   transition: opacity 0.2s ease;
-}
+} */
 
 html[data-theme-applied] {
   opacity: 1;

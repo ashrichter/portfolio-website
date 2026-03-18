@@ -17,7 +17,10 @@ export default function ThemeToggle() {
     const rect = buttonRef.current.getBoundingClientRect();
     const vw = window.innerWidth;
     const vh = window.innerHeight;
-    const radius = Math.sqrt(vw * vw + vh * vh);
+    const maxX = Math.max(rect.left, vw - rect.left);
+    const maxY = Math.max(rect.top, vh - rect.top);
+    const radius = Math.sqrt(maxX * maxX + maxY * maxY);
+ 
 
     setCirclePos({
       top: rect.top + rect.height / 2,
@@ -41,7 +44,7 @@ export default function ThemeToggle() {
         localStorage.setItem("theme", "dark");
       }
 
-      setMode("collapse");
+      // setMode("collapse");
     }, 400);
 
     setTimeout(() => {
