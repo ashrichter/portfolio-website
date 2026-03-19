@@ -2,7 +2,7 @@
    MAIN CONTAINER
    ====================================================== */
 
-/* Centers all content both vertically and horizontally on the page */
+/* Centers all content vertically and horizontally */
 .container {
     display: flex;
     justify-content: center; /* Horizontal centering */
@@ -11,11 +11,15 @@
     text-align: center;      /* Center text content */
 
     height: 100vh;           /* Full viewport height */
+    width: 100%;             /* Full width */
 
-    /* Fade-in animation on load */
+    /* Theme-aware background */
+    background-color: var(--primary-color);
+    color: var(--text-color);
+
+    /* Fade-in animation */
     animation: fadeIn 0.4s ease;
 }
-
 
 /* ======================================================
    MAIN TITLE
@@ -23,10 +27,10 @@
 
 /* Large heading text */
 .title {
-    font-size: 2.5rem;  /* Prominent main title size */
-    margin-bottom: 10px; /* Space below the title */
+    font-size: 2.5rem;          /* Prominent main title */
+    margin-bottom: 10px;        /* Space below title */
+    color: var(--text-color);   /* Theme-aware text color */
 }
-
 
 /* ======================================================
    SUBTITLE
@@ -34,33 +38,33 @@
 
 /* Smaller supporting text under the main title */
 .subtitle {
-    margin-top: 20px;      /* Space above the subtitle */
-    font-size: 1.2rem;     /* Slightly smaller font */
+    margin-top: 20px;           /* Space above subtitle */
+    font-size: 1.2rem;          /* Slightly smaller font */
+    color: var(--sub-text-color); /* Theme-aware subtitle color */
 }
-
 
 /* ======================================================
    LINKS
    ====================================================== */
 
-/* Styling for inline links */
+/* Inline links styling */
 .link {
-    text-decoration: none;    /* Remove default underline */
-    color: var(--tag-color);  /* Use site-specific color */
-    transition: color 0.2s ease; /* Smooth color transition on hover */
+    text-decoration: none;         /* Remove underline */
+    color: var(--link-color);      /* Theme-aware link color */
+    transition: color 0.2s ease;   /* Smooth hover transition */
 }
 
 /* Hover effect for links */
 .link:hover {
-    text-decoration: underline; /* Add underline on hover */
+    text-decoration: underline;    /* Underline on hover */
+    color: var(--hover-color);     /* Change color on hover */
 }
-
 
 /* ======================================================
    ANIMATIONS
    ====================================================== */
 
-/* Simple fade-in animation from slightly above */
+/* Simple fade-in from slightly above */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -68,6 +72,6 @@
     }
     to {
         opacity: 1;
-        transform: translateY(0);     /* Move to final position */
+        transform: translateY(0);     /* Final position */
     }
 }
