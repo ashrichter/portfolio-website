@@ -40,6 +40,20 @@ Global CSS Variables
   --link-color: #81A1C1;
   --visited-color: #B48EAD;
   --tag-color: #b7d89a;
+
+  --tab-bg: var(--secondary-color);
+  --tab-text: var(--text-color-dark);
+  --tab-active-bg: var(--text-color-dark);
+  --tab-active-text: var(--primary-color);
+  
+  --chip-bg: var(--secondary-color);
+  --chip-text: var(--text-color-dark);
+  --chip-active-bg: var(--text-color-dark);
+  --chip-active-text: var(--primary-color);
+
+  --skill-bg-alpha: 0.3;
+  --skill-brightness-adjust: -80;
+  --skill-text-mode: original; /* use original color */
 }
 
 /* =========================================
@@ -58,6 +72,19 @@ html.light-theme {
   --hover-color: #5E81AC;
   --link-color: #5E81AC;
   --visited-color: #B48EAD;
+  /* --tab-bg: #E5E9F0;
+  --tab-text: #2E3440;
+  --tab-active-bg: #2E3440;
+  --tab-active-text: #FFFFFF; */
+  --chip-bg: #E5E9F0;
+  --chip-text: #2E3440;
+  --chip-active-bg: #2E3440;
+  --chip-active-text: #FFFFFF;
+  --tag-color: #2F855A; /* darker green */
+
+  --skill-bg-alpha: 0.08;
+  --skill-brightness-adjust: 0;
+  --skill-text-mode: dark; /* force readable text */
 }
 
 /* =========================================

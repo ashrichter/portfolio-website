@@ -1,73 +1,70 @@
+'use client';
+
+import { useEffect, useState } from 'react';
 import styles from '@/styles/homepage.module.css';
 import skillsJSON from '@/../_content/skills.json';
 
 export default function Skills() {
+  const [isLight, setIsLight] = useState(false);
 
-    return (
-        // Section container for all skill tags
-        <section id="skills" className={styles.skillsDiv}>
-            {Object.entries(skillsJSON).map(([skill, data]) => {
+  useEffect(() => {
+    const root = document.documentElement;
 
-                // Decide whether the skill should be a clickable link (<a>)
-                // or just a label (<span>) depending on whether a link exists
-                const Tag = data.link === '' ? 'span' : 'a';
+    const updateTheme = () => setIsLight(root.classList.contains('light-theme'));
 
-                return (
-                    <Tag
-                        key={skill}
+    // Initial check
+    updateTheme();
 
-                        // Only add link-related attributes if a URL exists
-                        {...(data.link && {
-                            href: data.link,
-                            target: "_blank",
-                            rel: "noopener noreferrer"
-                        })}
+    // Watch for class changes on <html>
+    const observer = new MutationObserver(updateTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ['class'] });
 
-                        // Apply dynamic styling based on the skill's color
-                        style={{
-                            borderColor: data.color, // Border uses the original skill color
-                            color: data.color,       // Text uses the same color
-                            
-                            // Background uses a darker, semi-transparent version of the color
-                            // created by adjusting the RGB values and converting to rgba()
-                            backgroundColor: adjustColorToRGBA(data.color, -80, 0.3)
-                        }}
-                    >
-                        {/* Display the skill name */}
-                        {skill}
-                    </Tag>
-                );
-            })}
-        </section>
-    );
+    return () => observer.disconnect();
+  }, []);
+
+  return (
+    <section id="skills" className={styles.skillsDiv}>
+      {Object.entries(skillsJSON).map(([skill, data]) => {
+        const Tag = data.link === '' ? 'span' : 'a';
+
+        // Flip colors in light mode with adjustable transparency
+        const textColor = isLight
+          ? hexToRGBA(lightenColor(data.color, -100), 0.9) // darkened text
+          : data.color;
+
+        const bgColor = isLight
+          ? hexToRGBA(data.color, 0.4) // light mode transparency
+          : hexToRGBA(lightenColor(data.color, -80), 0.3); // dark mode transparency
+
+        return (
+          <Tag
+            key={skill}
+            data-color={data.color}
+            {...(data.link && { href: data.link, target: '_blank', rel: 'noopener noreferrer' })}
+            style={{
+              '--skill-color': textColor,
+              '--skill-bg': bgColor
+            } as React.CSSProperties}
+          >
+            {skill}
+          </Tag>
+        );
+      })}
+    </section>
+  );
 }
 
+// Helpers
+function hexToRGBA(hex: string, alpha: number) {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
 
-/*
-    Converts a hex color to a darker/lighter RGBA color.
-
-    Parameters:
-    hex   → original hex color (e.g. "#61DAFB")
-    amount → how much to adjust brightness (-80 makes it darker)
-    alpha → transparency value for the background (0–1)
-
-    Returns:
-    rgba(r, g, b, alpha) string for use in CSS
-*/
-function adjustColorToRGBA(hex: string, amount: number, alpha: number) {
-
-    // Extract the RGB components from the hex string
-    // "#61DAFB" → "61", "DA", "FB"
-    let r = parseInt(hex.slice(1, 3), 16);
-    let g = parseInt(hex.slice(3, 5), 16);
-    let b = parseInt(hex.slice(5, 7), 16);
-
-    // Adjust brightness by adding the amount
-    // Clamp values between 0 and 255 to keep them valid RGB values
-    r = Math.max(0, Math.min(255, r + amount));
-    g = Math.max(0, Math.min(255, g + amount));
-    b = Math.max(0, Math.min(255, b + amount));
-
-    // Return the final rgba() color string used for the background
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+function lightenColor(color: string, amount: number) {
+  return color.replace(/[\da-fA-F]{2}/g, match => {
+    const num = parseInt(match, 16) + amount;
+    return Math.min(255, Math.max(0, num)).toString(16).padStart(2, '0');
+  });
 }

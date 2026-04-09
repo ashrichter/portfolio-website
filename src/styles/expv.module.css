@@ -299,3 +299,13 @@
 .expViewContainer {
     margin-top: 0;
 }
+
+.tab {
+    background-color: var(--chip-bg);
+    color: var(--chip-text);
+  }
+  
+  .activeTab {
+    background-color: var(--chip-active-bg);
+    color: var(--chip-active-text);
+  }

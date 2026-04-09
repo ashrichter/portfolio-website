@@ -186,22 +186,38 @@
 }
 
 .projectLinksDiv img, 
-.projectLinksDiv svg,
+.projectLinksDiv svg{
+    width: 22px;
+    height: 22px;
+    vertical-align: middle;
+    transition: all var(--base-transition-time) ease;
+    fill: var(--sub-text-color);
+    /* z-index: 10000; */
+}
+
+
+
 .projectLinksDivDemo img, 
 .projectLinksDivDemo svg {
     width: 22px;
     height: 22px;
     vertical-align: middle;
     transition: all var(--base-transition-time) ease;
-    fill: var(--sub-text-color);
-    z-index: 10000;
+    stroke: var(--sub-text-color);
+    /* z-index: 10000; */
 }
 
+
 .projectLinksDiv img:hover, 
-.projectLinksDiv svg:hover,
+.projectLinksDiv svg:hover {
+    fill: var(--text-color-dark);
+    filter: drop-shadow(0px 0px 10px var(--hover-color));
+}
+
+
 .projectLinksDivDemo img:hover, 
 .projectLinksDivDemo svg:hover {
-    fill: var(--text-color-dark);
+    stroke: var(--text-color-dark);
     filter: drop-shadow(0px 0px 10px var(--hover-color));
 }
 

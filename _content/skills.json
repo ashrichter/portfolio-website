@@ -1,5 +1,9 @@
 {
     "Machine Learning": {"color": "#D8DEE9", "link": "https://en.wikipedia.org/wiki/Machine_learning"},
     "Pytorch": {"color": "#D08770", "link": "https://pytorch.org/"},
-    "Pytorc": {"color": "#D08770", "link": ""}
+    "Pytorca": {"color": "#EBCB8B", "link": ""},
+    "Machine Learningb": {"color": "#81A1C1", "link": "https://en.wikipedia.org/wiki/Machine_learning"},
+    "Pytorchc": {"color": "#8FBCBB", "link": "https://pytorch.org/"},
+    "Pytorcd": {"color": "#88C0D0", "link": ""},
+    "Pytorcd": {"color": "#BF616A", "link": ""}
 }
