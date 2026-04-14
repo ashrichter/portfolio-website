@@ -1,7 +1,7 @@
 .navToggleWrapper {
   display: flex;
   align-items: center;
-  color: var(--text-color); /* Ensures SVG inherits navbar link color */
+  color: var(--text-color);
 }
 
 .blender {
@@ -10,9 +10,11 @@
   pointer-events: none;
   z-index: 50;
   background: var(--primary-color);
+
   transform: translate(-50%, -50%) scale(0);
   transform-origin: center;
-  transition: transform 0.6s ease, background var(--smooth-transition-time) ease;
+
+  transition: transform 0.54s ease;
 }
 
 .themeToggle {
@@ -25,5 +27,8 @@
 
 .themeToggle:hover {
   color: var(--hover-color);
-  /* transform: scale(1.1); */
+}
+
+:global(html.theme-animating) .themeToggle {
+  transition: none !important;
 }

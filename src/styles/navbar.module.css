@@ -90,3 +90,8 @@
         margin-left: 0;
     }
 }
+
+:global(html.theme-animating) .logo,
+:global(html.theme-animating) .routeb {
+  transition: none !important;
+}

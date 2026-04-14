@@ -29,7 +29,8 @@ export default function Skills() {
 
         // Flip colors in light mode with adjustable transparency
         const textColor = isLight
-          ? hexToRGBA(lightenColor(data.color, -100), 0.9) // darkened text
+          ? hexToRGBA(lightenColor(data.color, -100), 0.9
+        ) // darkened text
           : data.color;
 
         const bgColor = isLight

@@ -104,3 +104,9 @@
     }
 
 }
+
+:global(html.theme-animating) .menudiv li,
+:global(html.theme-animating) .menudiv .menuitem,
+:global(html.theme-animating) .menudiv .selectedoption {
+  transition: none !important;
+}

@@ -123,10 +123,6 @@
 .expViewContainer {
     margin-top: var(--min-margin-top);
 
-    /* Smooth open/close transition */
-    transition: all var(--smooth-transition-time)
-        cubic-bezier(0.23, 1, 0.32, 1);
-
     /* Fade in animation when expanded */
     animation: fadeIn var(--normal-transition-time) ease;
 }
@@ -264,7 +260,7 @@
 
     cursor: pointer;
 
-    transition: all var(--base-transition-time) ease;
+    transition: opacity var(--base-transition-time) ease;
 
     color: var(--text-color-dark);
     opacity: 0.7;
@@ -309,3 +305,15 @@
     background-color: var(--chip-active-bg);
     color: var(--chip-active-text);
   }
+
+:global(html.theme-animating) .tab,
+:global(html.theme-animating) .activeTab,
+:global(html.theme-animating) .expMaxMin,
+:global(html.theme-animating) .expViewContainer,
+:global(html.theme-animating) .expListContainer,
+:global(html.theme-animating) .tabContainer,
+:global(html.theme-animating) .contentDiv,
+:global(html.theme-animating) .skillUsed,
+:global(html.theme-animating) .skillUsed span {
+  transition: none !important;
+}

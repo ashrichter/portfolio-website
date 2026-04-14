@@ -18,7 +18,7 @@
     border-radius: 5px;
     font-size: var(--fsize-smol);
     cursor: pointer;
-    transition: all var(--base-transition-time) ease;
+    transition: opacity var(--base-transition-time) ease;
 }
 
 .filterTags span:hover {
@@ -42,12 +42,11 @@
    MAIN PROJECT CONTAINER
    ====================================================== */
 
-.projectMainDiv {
+   .projectMainDiv {
     margin: 1em;
     padding-bottom: 30px;
     background-color: var(--primary-color);
     color: var(--text-color);
-    transition: background-color var(--normal-transition-time) ease;
 }
 
 /* ======================================================
@@ -67,4 +66,12 @@
     .projectsGrid {
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
+}
+
+:global(html.theme-animating) .projectMainDiv,
+:global(html.theme-animating) .projectsGrid,
+:global(html.theme-animating) .filterTags,
+:global(html.theme-animating) .filterTags span,
+:global(html.theme-animating) .activeTag {
+  transition: none !important;
 }

@@ -85,6 +85,7 @@ html.light-theme {
   --skill-bg-alpha: 0.08;
   --skill-brightness-adjust: 0;
   --skill-text-mode: dark; /* force readable text */
+  
 }
 
 /* =========================================
@@ -136,6 +137,13 @@ footer {
 body, main, .page-wrapper {
   transition: background-color var(--normal-transition-time) ease,
               color var(--normal-transition-time) ease;
+}
+
+html.theme-animating body,
+html.theme-animating main,
+html.theme-animating .page-wrapper,
+html.theme-animating footer {
+  transition: none !important;
 }
 
 /* Inline code */
