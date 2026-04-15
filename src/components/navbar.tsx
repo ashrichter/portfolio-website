@@ -1,39 +1,38 @@
+'use client';
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import styles from '@/styles/navbar.module.css';
 import Logo from "@/components/logo";
 import ThemeToggle from "@/components/themetoggle";
 
-/* =========================================
-   Navbar Component
-   Displays the logo, navigation link,
-   and theme toggle button.
-========================================= */
-
 export default function Navbar(props: {
-    to_path: string,
-    name: string
-}){
-    return <div className={styles.navbar}>
+  to_path: string,
+  name: string
+}) {
+  const pathname = usePathname();
 
-        <Link href="/" className={styles.logo}>
-            <Logo />
+  const handleLogoClick = () => {
+    // If already on homepage, force-reset the homepage section
+    if (pathname === "/") {
+      window.dispatchEvent(new CustomEvent("go-home-section"));
+      window.history.replaceState(null, "", "/#home");
+    }
+  };
+
+  return (
+    <div className={styles.navbar}>
+      <Link href="/#home" className={styles.logo} onClick={handleLogoClick}>
+        <Logo />
+      </Link>
+
+      <div className={styles.navright}>
+        <ThemeToggle />
+
+        <Link className={styles.routeb} href={props.to_path}>
+          {props.name}
         </Link>
-
-        {/* Right side navigation area */}
-        <div className={styles.navright}>
-
-            {/* Theme toggle button */}
-            <ThemeToggle />
-
-            {/* Main navigation link */}
-            <Link
-              className={styles.routeb}
-              href={props.to_path}
-            >
-              {props.name}
-            </Link>
-
-        </div>
-
+      </div>
     </div>
+  );
 }
