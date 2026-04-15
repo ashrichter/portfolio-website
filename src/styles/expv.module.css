@@ -306,14 +306,14 @@
     color: var(--chip-active-text);
   }
 
-:global(html.theme-animating) .tab,
-:global(html.theme-animating) .activeTab,
-:global(html.theme-animating) .expMaxMin,
-:global(html.theme-animating) .expViewContainer,
-:global(html.theme-animating) .expListContainer,
-:global(html.theme-animating) .tabContainer,
-:global(html.theme-animating) .contentDiv,
-:global(html.theme-animating) .skillUsed,
-:global(html.theme-animating) .skillUsed span {
+:global(html.theme-switching) .tab,
+:global(html.theme-switching) .activeTab,
+:global(html.theme-switching) .expMaxMin,
+:global(html.theme-switching) .expViewContainer,
+:global(html.theme-switching) .expListContainer,
+:global(html.theme-switching) .tabContainer,
+:global(html.theme-switching) .contentDiv,
+:global(html.theme-switching) .skillUsed,
+:global(html.theme-switching) .skillUsed span {
   transition: none !important;
 }

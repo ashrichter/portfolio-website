@@ -1,34 +1,30 @@
 "use client";
 
-import { useState, useRef, useLayoutEffect, useEffect } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import styles from "@/styles/themetoggle.module.css";
 
-const BLENDER_MS = 540;
+const FORCE_SIMPLE_THEME_FALLBACK = false;
 
-const THEME_BG = {
-  light: "#ECEFF4",
-  dark: "#2E3440",
-} as const;
+type Theme = "light" | "dark";
+
+type StartViewTransitionFn = (
+  options:
+    | (() => void | Promise<void>)
+    | {
+        update: () => void | Promise<void>;
+        types?: string[];
+      }
+) => {
+  finished: Promise<void>;
+};
 
 export default function ThemeToggle() {
-  const [phase, setPhase] = useState<"idle" | "expand" | "collapse">("idle");
-  const [animKey, setAnimKey] = useState(0);
-
-  const [theme, setTheme] = useState<"light" | "dark">(() => {
+  const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === "undefined") return "light";
-    return (localStorage.getItem("theme") as "light" | "dark") || "light";
+    return (localStorage.getItem("theme") as Theme) || "light";
   });
 
-  const [overlayTheme, setOverlayTheme] = useState<"light" | "dark">(theme);
-
   const svgRef = useRef<SVGSVGElement>(null);
-
-  const [circlePos, setCirclePos] = useState({ top: 0, left: 0 });
-  const [circleScale, setCircleScale] = useState(0);
-
-  const timeoutRef = useRef<number | null>(null);
-  const rafOneRef = useRef<number | null>(null);
-  const rafTwoRef = useRef<number | null>(null);
 
   useLayoutEffect(() => {
     const root = document.documentElement;
@@ -36,34 +32,7 @@ export default function ThemeToggle() {
     root.classList.toggle("dark-theme", theme === "dark");
   }, [theme]);
 
-  useEffect(() => {
-    return () => {
-      cancelPendingAnimation();
-    };
-  }, []);
-
-  const cancelPendingAnimation = () => {
-    const root = document.documentElement;
-
-    if (rafOneRef.current !== null) {
-      cancelAnimationFrame(rafOneRef.current);
-      rafOneRef.current = null;
-    }
-
-    if (rafTwoRef.current !== null) {
-      cancelAnimationFrame(rafTwoRef.current);
-      rafTwoRef.current = null;
-    }
-
-    if (timeoutRef.current !== null) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-
-    root.classList.remove("theme-animating");
-  };
-
-  const applyTheme = (nextTheme: "light" | "dark") => {
+  const applyTheme = (nextTheme: Theme) => {
     const root = document.documentElement;
 
     root.classList.toggle("light-theme", nextTheme === "light");
@@ -73,11 +42,53 @@ export default function ThemeToggle() {
     localStorage.setItem("theme", nextTheme);
   };
 
+  const startNativeViewTransition = (
+    nextTheme: Theme,
+    cx: number,
+    cy: number,
+    radius: number
+  ) => {
+    const root = document.documentElement;
+    const startViewTransition = (
+      document as Document & {
+        startViewTransition?: StartViewTransitionFn;
+      }
+    ).startViewTransition;
+
+    if (!startViewTransition) return false;
+
+    try {
+      root.style.setProperty("--theme-vt-x", `${cx}px`);
+      root.style.setProperty("--theme-vt-y", `${cy}px`);
+      root.style.setProperty("--theme-vt-r", `${radius}px`);
+
+      const type =
+        nextTheme === "light" ? "theme-to-light" : "theme-to-dark";
+
+      const transition = startViewTransition.call(document, {
+        update: () => {
+          applyTheme(nextTheme);
+        },
+        types: [type],
+      });
+
+      transition.finished.finally(() => {
+        root.style.removeProperty("--theme-vt-x");
+        root.style.removeProperty("--theme-vt-y");
+        root.style.removeProperty("--theme-vt-r");
+      });
+
+      return true;
+    } catch {
+      root.style.removeProperty("--theme-vt-x");
+      root.style.removeProperty("--theme-vt-y");
+      root.style.removeProperty("--theme-vt-r");
+      return false;
+    }
+  };
+
   const toggleTheme = () => {
     if (!svgRef.current) return;
-
-    cancelPendingAnimation();
-    setAnimKey((k) => k + 1);
 
     const rect = svgRef.current.getBoundingClientRect();
     const vw = window.innerWidth;
@@ -93,74 +104,29 @@ export default function ThemeToggle() {
       Math.hypot(vw - cx, vh - cy)
     );
 
-    const isLight = theme === "light";
-    const nextTheme = isLight ? "dark" : "light";
+    const nextTheme: Theme = theme === "light" ? "dark" : "light";
 
-    setCirclePos({ top: cy, left: cx });
-    setCircleScale(radius);
-    setOverlayTheme(nextTheme);
-
-    const root = document.documentElement;
-
-    // LIGHT → DARK
-    if (isLight) {
-      root.classList.add("theme-animating");
-      setPhase("expand");
-
-      rafOneRef.current = requestAnimationFrame(() => {
-        applyTheme(nextTheme);
-
-        rafTwoRef.current = requestAnimationFrame(() => {
-          setPhase("collapse");
-
-          timeoutRef.current = window.setTimeout(() => {
-            setPhase("idle");
-            root.classList.remove("theme-animating");
-            timeoutRef.current = null;
-          }, BLENDER_MS);
-        });
-      });
-
+    // Modern browsers: native radial view transition
+    if (
+      !FORCE_SIMPLE_THEME_FALLBACK &&
+      startNativeViewTransition(nextTheme, cx, cy, radius)
+    ) {
       return;
     }
 
-    // DARK → LIGHT
-    root.classList.add("theme-animating");
-    setPhase("collapse");
+    const root = document.documentElement;
+    root.classList.add("theme-switching");
 
-    rafOneRef.current = requestAnimationFrame(() => {
-      setPhase("expand");
+    // Forced fallback or older browsers: simple instant theme switch
+    applyTheme(nextTheme);
 
-      timeoutRef.current = window.setTimeout(() => {
-        applyTheme(nextTheme);
-
-        rafTwoRef.current = requestAnimationFrame(() => {
-          setPhase("idle");
-          root.classList.remove("theme-animating");
-        });
-      }, BLENDER_MS);
+    requestAnimationFrame(() => {
+      root.classList.remove("theme-switching");
     });
   };
 
   return (
     <div className={styles.navToggleWrapper}>
-      {phase !== "idle" && (
-        <div
-          key={animKey}
-          className={styles.blender}
-          style={{
-            top: circlePos.top,
-            left: circlePos.left,
-            width: `${circleScale * 2}px`,
-            height: `${circleScale * 2}px`,
-            backgroundColor: THEME_BG[overlayTheme],
-            transform: `translate(-50%, -50%) scale(${
-              phase === "expand" ? 1 : 0
-            })`,
-          }}
-        />
-      )}
-
       <svg
         ref={svgRef}
         viewBox="0 0 24 24"

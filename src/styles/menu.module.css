@@ -105,8 +105,8 @@
 
 }
 
-:global(html.theme-animating) .menudiv li,
-:global(html.theme-animating) .menudiv .menuitem,
-:global(html.theme-animating) .menudiv .selectedoption {
+:global(html.theme-switching) .menudiv li,
+:global(html.theme-switching) .menudiv .menuitem,
+:global(html.theme-switching) .menudiv .selectedoption {
   transition: none !important;
 }

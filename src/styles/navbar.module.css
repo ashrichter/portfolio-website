@@ -91,7 +91,7 @@
     }
 }
 
-:global(html.theme-animating) .logo,
-:global(html.theme-animating) .routeb {
+:global(html.theme-switching) .logo,
+:global(html.theme-switching) .routeb {
   transition: none !important;
 }

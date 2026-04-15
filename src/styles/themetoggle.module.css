@@ -4,19 +4,6 @@
   color: var(--text-color);
 }
 
-.blender {
-  position: fixed;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 50;
-  background: var(--primary-color);
-
-  transform: translate(-50%, -50%) scale(0);
-  transform-origin: center;
-
-  transition: transform 0.54s ease;
-}
-
 .themeToggle {
   width: 1.6rem;
   height: 1.6rem;
@@ -27,8 +14,4 @@
 
 .themeToggle:hover {
   color: var(--hover-color);
-}
-
-:global(html.theme-animating) .themeToggle {
-  transition: none !important;
 }

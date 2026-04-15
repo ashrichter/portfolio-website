@@ -68,10 +68,10 @@
     }
 }
 
-:global(html.theme-animating) .projectMainDiv,
-:global(html.theme-animating) .projectsGrid,
-:global(html.theme-animating) .filterTags,
-:global(html.theme-animating) .filterTags span,
-:global(html.theme-animating) .activeTag {
+:global(html.theme-switching) .projectMainDiv,
+:global(html.theme-switching) .projectsGrid,
+:global(html.theme-switching) .filterTags,
+:global(html.theme-switching) .filterTags span,
+:global(html.theme-switching) .activeTag {
   transition: none !important;
 }

@@ -115,8 +115,8 @@
     }
 }
 
-:global(html.theme-animating) .logoDiv,
-:global(html.theme-animating) .logoDiv svg,
-:global(html.theme-animating) .sidebarDiv ul::after {
+:global(html.theme-switching) .logoDiv,
+:global(html.theme-switching) .logoDiv svg,
+:global(html.theme-switching) .sidebarDiv ul::after {
   transition: none !important;
 }

@@ -26,6 +26,10 @@ Global CSS Variables
   --fsize-large: 1.95em;
   --fsize-xlarge: 2.45em;
 
+  --theme-vt-x: 50vw;
+  --theme-vt-y: 50vh;
+  --theme-vt-r: 0px;
+
   /* DARK THEME */
   --primary-color: #2E3440;
   --overlay-color: #3b4252c8;
@@ -72,20 +76,15 @@ html.light-theme {
   --hover-color: #5E81AC;
   --link-color: #5E81AC;
   --visited-color: #B48EAD;
-  /* --tab-bg: #E5E9F0;
-  --tab-text: #2E3440;
-  --tab-active-bg: #2E3440;
-  --tab-active-text: #FFFFFF; */
   --chip-bg: #E5E9F0;
   --chip-text: #2E3440;
   --chip-active-bg: #2E3440;
   --chip-active-text: #FFFFFF;
-  --tag-color: #2F855A; /* darker green */
+  --tag-color: #2F855A;
 
   --skill-bg-alpha: 0.08;
   --skill-brightness-adjust: 0;
-  --skill-text-mode: dark; /* force readable text */
-  
+  --skill-text-mode: dark;
 }
 
 /* =========================================
@@ -109,7 +108,6 @@ body {
   flex-direction: column;
 }
 
-/* Wrapper from layout.tsx */
 .page-wrapper {
   min-height: 100vh;
   display: flex;
@@ -118,7 +116,6 @@ body {
   color: var(--text-color);
 }
 
-/* Main content expands */
 main {
   flex: 1;
   width: 100%;
@@ -126,23 +123,84 @@ main {
   color: var(--text-color);
 }
 
-/* Footer */
 footer {
   background-color: var(--primary-color);
   color: var(--text-color);
   margin-top: auto;
 }
 
-/* Global transitions */
 body, main, .page-wrapper {
   transition: background-color var(--normal-transition-time) ease,
               color var(--normal-transition-time) ease;
 }
 
-html.theme-animating body,
-html.theme-animating main,
-html.theme-animating .page-wrapper,
-html.theme-animating footer {
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition: none !important;
+  animation: none !important;
+}
+
+/* =========================================
+View Transitions
+========================================= */
+@keyframes theme-reveal-new {
+  from {
+    clip-path: circle(0px at var(--theme-vt-x) var(--theme-vt-y));
+  }
+  to {
+    clip-path: circle(var(--theme-vt-r) at var(--theme-vt-x) var(--theme-vt-y));
+  }
+}
+
+@keyframes theme-hide-old {
+  from {
+    clip-path: circle(var(--theme-vt-r) at var(--theme-vt-x) var(--theme-vt-y));
+  }
+  to {
+    clip-path: circle(0px at var(--theme-vt-x) var(--theme-vt-y));
+  }
+}
+
+:root::view-transition-group(root),
+:root::view-transition-image-pair(root),
+:root::view-transition-old(root),
+:root::view-transition-new(root) {
+  animation: none;
+}
+
+:root::view-transition-old(root),
+:root::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+:root::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+:root:active-view-transition-type(theme-to-light)::view-transition-new(root) {
+  z-index: 1;
+  animation: theme-reveal-new 540ms ease both;
+}
+
+:root:active-view-transition-type(theme-to-light)::view-transition-old(root) {
+  z-index: 0;
+  opacity: 1;
+}
+
+:root:active-view-transition-type(theme-to-dark)::view-transition-old(root) {
+  z-index: 1;
+  animation: theme-hide-old 540ms ease both;
+}
+
+:root:active-view-transition-type(theme-to-dark)::view-transition-new(root) {
+  z-index: 0;
+  opacity: 1;
+}
+
+:root:active-view-transition *,
+:root:active-view-transition *::before,
+:root:active-view-transition *::after {
   transition: none !important;
 }
 
