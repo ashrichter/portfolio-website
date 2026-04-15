@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Menu from "@/components/_homepage/options";
 import styles from "@/styles/homepage.module.css";
 
@@ -8,6 +8,7 @@ export default function HomePage(props:{
   sections: { [key: string]: JSX.Element }
 }) {
   const [bodyJSX, setBodyJSX] = useState<string>("home");
+  const [refreshKey, setRefreshKey] = useState<number>(0);
 
   const isKeyExist = (keyStr: string) => {
     return Object.prototype.hasOwnProperty.call(props.sections, keyStr);
@@ -17,9 +18,22 @@ export default function HomePage(props:{
     key.charAt(0).toUpperCase() + key.slice(1)
   );
 
+  useEffect(() => {
+    const handleHomeLogoRefresh = () => {
+      setBodyJSX("home");
+      setRefreshKey(prev => prev + 1);
+    };
+
+    window.addEventListener("home-logo-refresh", handleHomeLogoRefresh);
+
+    return () => {
+      window.removeEventListener("home-logo-refresh", handleHomeLogoRefresh);
+    };
+  }, []);
+
   return (
     <>
-      <div className={styles.homedivmain}>
+      <div className={styles.homedivmain} key={`${bodyJSX}-${refreshKey}`}>
         {props.sections[bodyJSX] ?? props.sections["home"]}
       </div>
 

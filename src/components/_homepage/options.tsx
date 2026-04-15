@@ -24,11 +24,18 @@ function Menu(props: {
       changeKeybyHash(window.location.hash);
     };
 
+    const handleHomeLogoRefresh = () => {
+      setBodyJSX("home");
+    };
+
     window.addEventListener("hashchange", handleHashChange);
+    window.addEventListener("home-logo-refresh", handleHomeLogoRefresh);
+
     handleHashChange();
 
     return () => {
       window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("home-logo-refresh", handleHomeLogoRefresh);
     };
   }, [setBodyJSX, isKeyExist]);
 
