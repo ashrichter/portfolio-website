@@ -1,13 +1,12 @@
 import Link from "next/link";
-import styles from "@/styles/notfound.module.css";
 
 export default function NotFound() {
   return (
-    <div className={styles.container}>
-      <h1 className={styles.title}>Page Not Found</h1>
-      <h3 className={styles.subtitle}>
+    <div className="notfound-container">
+      <h1 className="notfound-title">Page Not Found</h1>
+      <h3 className="notfound-subtitle">
         Go back to{" "}
-        <Link href="/" className={styles.link}>
+        <Link href="/#home" className="notfound-link">
           Home
         </Link>
       </h3>

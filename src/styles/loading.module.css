@@ -2,82 +2,66 @@
    GLOBAL CONTAINER RESET
    ====================================================== */
 
-/* Basic container reset to remove default spacing
-   and ensure consistent box sizing */
    .container {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
   
-  
   /* ======================================================
      CENTERING WRAPPER
      ====================================================== */
   
-  /* Utility container to vertically and horizontally
-     center content on the page */
   .center {
-    height: 90vh; /* Takes most of the viewport height */
+    min-height: 100vh;
+    width: 100%;
   
     display: flex;
-    justify-content: center; /* Horizontal centering */
-    align-items: center;     /* Vertical centering */
-  }
+    justify-content: center;
+    align-items: center;
   
+    background-color: var(--primary-color);
+    color: var(--text-color);
+  }
   
   /* ======================================================
      WAVE ELEMENT
      ====================================================== */
   
-     .wave {
-      width: 10px;
-      height: 10px;
-    
-      /* USES THEME COLORS */
-      background: var(--hover-color);
-    
-      margin: 10px;
-    
-      animation: wave var(--smooth-transition-time) linear infinite;
-    
-      border-radius: 20px;
-      opacity: 1;
-    }
-  
+  .wave {
+    width: 10px;
+    height: 10px;
+    background: var(--hover-color);
+    margin: 10px;
+    animation: wave var(--smooth-transition-time) linear infinite;
+    border-radius: 20px;
+    opacity: 1;
+  }
   
   /* ======================================================
      WAVE ANIMATION
      ====================================================== */
   
-  /* Creates the bouncing / wave motion */
   @keyframes wave {
-  
-    /* Starting position */
     0% {
       transform: translateY(0);
-      /* opacity: 0.1; */
     }
   
-    /* First upward movement */
     25% {
       transform: translateY(-15px);
       opacity: 0.25;
     }
   
-    /* Peak of the wave */
     50% {
       transform: translateY(-30px);
       opacity: 0.5;
     }
   
-    /* Descending movement */
     75% {
       transform: translateY(-15px);
       opacity: 0.75;
     }
   
-    /* Return to starting position */
     100% {
       transform: translateY(0);
       opacity: 1;

@@ -57,7 +57,7 @@ Global CSS Variables
 
   --skill-bg-alpha: 0.3;
   --skill-brightness-adjust: -80;
-  --skill-text-mode: original; /* use original color */
+  --skill-text-mode: original;
 }
 
 /* =========================================
@@ -87,6 +87,26 @@ html.light-theme {
   --skill-text-mode: dark;
 }
 
+html {
+  background-color: #2E3440;
+  color-scheme: dark;
+}
+
+body {
+  background-color: #2E3440;
+  color: #ECEFF4;
+}
+
+html.light-theme {
+  background-color: #ECEFF4;
+  color-scheme: light;
+}
+
+html.dark-theme {
+  background-color: #2E3440;
+  color-scheme: dark;
+}
+
 /* =========================================
 Base Page Structure
 ========================================= */
@@ -94,7 +114,8 @@ html[data-theme-applied] {
   opacity: 1;
 }
 
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -129,9 +150,10 @@ footer {
   margin-top: auto;
 }
 
-body, main, .page-wrapper {
-  transition: background-color var(--normal-transition-time) ease,
-              color var(--normal-transition-time) ease;
+body,
+main,
+.page-wrapper {
+  transition: none;
 }
 
 html.theme-switching *,
@@ -222,6 +244,7 @@ small {
 a {
   color: var(--link-color);
 }
+
 a:visited {
   color: var(--visited-color);
 }
@@ -232,6 +255,7 @@ blockquote {
   padding: 0 1em;
   margin: 0 0 1em 0;
 }
+
 blockquote p {
   color: var(--sub-text-color);
 }
@@ -249,16 +273,74 @@ hr {
   width: 8px;
   background-color: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: var(--secondary-color);
   border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: var(--sub-text-color);
 }
+
 ::-webkit-scrollbar-corner,
 ::-webkit-scrollbar-track-piece {
   background-color: transparent;
+}
+
+/* =========================================
+404 Page
+========================================= */
+
+.notfound-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+
+  min-height: 100vh;
+  width: 100%;
+
+  background-color: var(--primary-color);
+  color: var(--text-color);
+  overflow: hidden;
+}
+
+.notfound-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: var(--text-color);
+  animation: notfound-dropIn 0.4s ease;
+}
+
+.notfound-subtitle {
+  margin-top: 20px;
+  font-size: 1.2rem;
+  color: var(--sub-text-color);
+  animation: notfound-dropIn 0.4s ease;
+}
+
+.notfound-link {
+  text-decoration: none;
+  color: var(--link-color);
+  transition: color 0.2s ease;
+}
+
+.notfound-link:hover {
+  text-decoration: underline;
+  color: var(--hover-color);
+}
+
+@keyframes notfound-dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* =========================================

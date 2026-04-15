@@ -1,5 +1,5 @@
 import Navbar from "@/components/navbar";
-import { getAllExperiences } from '@/lib/loadmd';
+import { getAllExperiences } from "@/lib/loadmd";
 
 import HomePage from "@/components/homepage";
 import ExperienceArray from "@/components/_homepage/expviewer";
@@ -17,9 +17,8 @@ export default function Home() {
   const exparr = getAllExperiences();
   const sociallinks: SocialLinks[] = scJson;
 
-  // Filter the experiences by category
-  const workArr = exparr.filter(exp => exp.category === 'work');
-  const eduArr = exparr.filter(exp => exp.category === 'education');
+  const workArr = exparr.filter((exp) => exp.category === "work");
+  const eduArr = exparr.filter((exp) => exp.category === "education");
 
   return (
     <main>
@@ -30,11 +29,11 @@ export default function Home() {
             home: <Intro />,
             about: <About />,
             skills: <Skills />,
-            experience: <ExperienceArray workArr={workArr} eduArr={eduArr} />, // Pass workArr and eduArr
+            experience: <ExperienceArray workArr={workArr} eduArr={eduArr} />,
             contact: <Contact />,
           }}
-        ></HomePage>
-        <Socials socials={sociallinks}></Socials>
+        />
+        <Socials socials={sociallinks} />
       </DelayedSuspense>
     </main>
   );
