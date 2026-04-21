@@ -37,7 +37,7 @@ Global CSS Variables
   --sub-text-color: #929AAA;
   --text-color-dark: #D8DEE9;
   --text-color: #ECEFF4;
-  --skill-box-color: #A3BE8C;
+  --skill-box-color: #88C0D0;
   --skill-box-bg: rgba(83, 110, 60, 0.1);
   --highlight-color: #4C566A;
   --hover-color: #88C0D0;
@@ -80,7 +80,7 @@ html.light-theme {
   --chip-text: #2E3440;
   --chip-active-bg: #2E3440;
   --chip-active-text: #FFFFFF;
-  --tag-color: #2F855A;
+  --tag-color: #7B8C4D;
 
   --skill-bg-alpha: 0.08;
   --skill-brightness-adjust: 0;
