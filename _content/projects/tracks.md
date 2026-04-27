@@ -15,7 +15,7 @@ tags: # Tags for project filtering
 thumbnail: "/images/dummy.png"  # Sets a pic in project view if first image is a vid
 
 images:
-  - "/videos/tracks.mp4"
+  - "/videos/tracks_web.mp4"
   - ""
   - ""
   - ""
