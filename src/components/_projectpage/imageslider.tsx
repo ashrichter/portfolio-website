@@ -33,7 +33,7 @@ function ImageSlider(
             src={props.image}
             controls // show video playback controls
             className={styles.videoPlayer}
-            autoPlay
+            // autoPlay
             loop
             muted // mute by default
           />
