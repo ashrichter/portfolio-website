@@ -31,21 +31,18 @@ function ImageSlider(
         {isVideo(props.image) ? (
           <video
             src={props.image}
-            controls // show video playback controls
+            controls
+            playsInline
             className={styles.videoPlayer}
-            // autoPlay
             loop
-            // muted // mute by default
           />
         ) : (
-
-          // Otherwise render the image
           <Image
             src={props.image}
-            alt={`slide-${index}`} // accessibility alt text
-            fill // makes the image fill the parent container
+            alt={`slide-${index}`}
+            fill
             sizes="(max-width: 768px) 90vw, (max-width: 1200px) 50vw, 33vw"
-            unoptimized={true} // disables Next.js optimization (useful for local assets/videos)
+            unoptimized={true}
           />
         )}
 

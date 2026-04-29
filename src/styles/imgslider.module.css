@@ -187,13 +187,10 @@
    VIDEO PLAYER
    ====================================================== */
 
-/* Ensures videos behave like images inside the slider */
-.videoPlayer {
+   .videoPlayer {
     width: 100%;
     height: 100%;
-
-    /* Forces the video to fully cover the container */
-    object-fit: cover;
-
+    object-fit: contain;
     display: block;
-}
+    background-color: var(--primary-color);
+  }
