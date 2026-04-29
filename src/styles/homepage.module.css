@@ -449,7 +449,7 @@
 /* Reduce spacing on short screens */
 @media screen and (max-height: 700px) {
   .skillsDiv {
-    margin-top: var(--min-margin-top);
+    margin-top: var(--normal-margin-top);
   }
 }
 
