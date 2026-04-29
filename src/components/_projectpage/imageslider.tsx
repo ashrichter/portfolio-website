@@ -35,7 +35,7 @@ function ImageSlider(
             className={styles.videoPlayer}
             // autoPlay
             loop
-            muted // mute by default
+            // muted // mute by default
           />
         ) : (
 

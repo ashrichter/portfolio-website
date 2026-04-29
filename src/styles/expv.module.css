@@ -101,8 +101,7 @@
 .contentDiv {
     font-size: var(--fsize-smol);
     position: relative;
-    display: inline-block;
-
+    display: block;
     padding-top: .5em;
     padding-left: 1em;
 }
@@ -127,11 +126,9 @@
     animation: fadeIn var(--normal-transition-time) ease;
 }
 
-/* Fade in inner content slightly after container */
-.expViewContainer .contentDiv,
-.expViewContainer .skillUsed {
-    animation: fadeIn2 var(--smooth-transition-time)
-        cubic-bezier(0.23, 1, 0.32, 1);
+.expViewContainer {
+    margin-top: 0;
+    animation: fadeIn var(--normal-transition-time) ease;
 }
 
 /* Secondary fade animation for inner content */
