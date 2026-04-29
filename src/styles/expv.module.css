@@ -34,12 +34,19 @@
 .expContainer {
     padding-top: 0.5em;
     font-size: var(--fsize-smol);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1em;
 }
 
 /* Left side of the experience container
    typically contains title and duration */
 .expContainerLeft {
-    float: left;
+    float: none;
+    flex: 1;
+    min-width: 0;
 }
 
 /* Ensures title and duration stack vertically */
@@ -71,7 +78,9 @@
    Used to toggle the detailed view
 ========================================= */
 .expMaxMin {
-    float: right;
+    float: none;
+    flex: 0 0 auto;
+
     width: 2ch;
     font-size: var(--fsize-mid);
     text-align: center;
@@ -81,6 +90,9 @@
     background-color: var(--highlight-color);
 
     cursor: pointer;
+
+    position: relative;
+    z-index: 2;
 
     /* Smooth hover transition */
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -102,6 +114,7 @@
     font-size: var(--fsize-smol);
     position: relative;
     display: block;
+
     padding-top: .5em;
     padding-left: 1em;
 }
@@ -120,18 +133,22 @@
 
 /* Container for the expanded view */
 .expViewContainer {
-    margin-top: var(--min-margin-top);
+    margin-top: 0;
 
     /* Fade in animation when expanded */
     animation: fadeIn var(--normal-transition-time) ease;
 }
 
-.expViewContainer {
-    margin-top: 0;
-    animation: fadeIn var(--normal-transition-time) ease;
+/* Secondary fade animation removed to prevent Safari bullet-point delay */
+/*
+.expViewContainer .contentDiv,
+.expViewContainer .skillUsed {
+    animation: fadeIn2 var(--smooth-transition-time)
+        cubic-bezier(0.23, 1, 0.32, 1);
 }
+*/
 
-/* Secondary fade animation for inner content */
+/* Secondary fade animation kept unused in case you want it elsewhere later */
 @keyframes fadeIn2 {
     from {
         opacity: 0;
@@ -196,12 +213,12 @@
     }
 
     /* Slightly smaller content text */
-    .contentDiv{
+    .contentDiv {
         font-size: .95em;
     }
 
     /* Extra spacing below expanded view */
-    .expViewContainer{
+    .expViewContainer {
         margin-bottom: 30px;
     }
 
@@ -262,7 +279,7 @@
     color: var(--text-color-dark);
     opacity: 0.7;
 
-    background-color: var(--secondary-color);
+    background-color: var(--chip-bg);
 }
 
 /* Hover effect for tabs */
@@ -273,8 +290,8 @@
 /* Active (selected) tab */
 .activeTab {
     opacity: 0.9;
-    background-color: var(--text-color-dark);
-    color: #000; /* var(--primary-color); */
+    background-color: var(--chip-active-bg);
+    color: var(--chip-active-text);
 }
 
 /* Hover state for active tab */
@@ -285,24 +302,9 @@
 
 
 /* =========================================
-   Experience Container Spacing Adjustment
+   Theme Switching Safety
+   Prevents unwanted transitions during theme toggle
 ========================================= */
-
-/* Removes extra margin if needed */
-.expViewContainer {
-    margin-top: 0;
-}
-
-.tab {
-    background-color: var(--chip-bg);
-    color: var(--chip-text);
-  }
-  
-  .activeTab {
-    background-color: var(--chip-active-bg);
-    color: var(--chip-active-text);
-  }
-
 :global(html.theme-switching) .tab,
 :global(html.theme-switching) .activeTab,
 :global(html.theme-switching) .expMaxMin,
@@ -312,5 +314,5 @@
 :global(html.theme-switching) .contentDiv,
 :global(html.theme-switching) .skillUsed,
 :global(html.theme-switching) .skillUsed span {
-  transition: none !important;
+    transition: none !important;
 }
