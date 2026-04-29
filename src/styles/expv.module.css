@@ -204,7 +204,8 @@
 
     /* Narrower container for mobile */
     .expContainer {
-        width: 470px;
+        width: 85vw;
+        max-width: 470px;
     }
 
     /* Slightly larger text for readability */
@@ -214,6 +215,8 @@
 
     /* Slightly smaller content text */
     .contentDiv {
+        width: 85vw;
+        max-width: 470px;
         font-size: .95em;
     }
 
