@@ -113,32 +113,30 @@ export default function ThemeToggle() {
 
       /*
         Mobile browser top/bottom chrome is outside the View Transition.
-
-        Light -> Dark:
-        Update browser chrome immediately because your dark theme is the
-        background behind the shrinking old light layer.
-
-        Dark -> Light:
-        Delay browser chrome update until the light reveal has finished.
+        This native radial transition is now only used on non-mobile screens.
       */
-        const transition = startViewTransition.call(document, {
-          update: () => {
-            applyTheme(nextTheme, { updateBrowserChrome: false });
-          },
-          types: [type],
-        });
-        
-        window.setTimeout(() => {
-          syncBrowserChrome(nextTheme);
-        }, nextTheme === "dark" ? 120 : 420);
-        
-        transition.finished.finally(() => {
-          root.style.removeProperty("--theme-vt-x");
-          root.style.removeProperty("--theme-vt-y");
-          root.style.removeProperty("--theme-vt-r");
-        
-          syncBrowserChrome(nextTheme);
-        });
+      const transition = startViewTransition.call(document, {
+        update: () => {
+          applyTheme(nextTheme, { updateBrowserChrome: false });
+        },
+        types: [type],
+      });
+
+      /*
+        Keep the delayed browser-chrome sync here for desktop/tablet browsers
+        that expose theme-color areas during the transition.
+      */
+      window.setTimeout(() => {
+        syncBrowserChrome(nextTheme);
+      }, nextTheme === "dark" ? 120 : 420);
+
+      transition.finished.finally(() => {
+        root.style.removeProperty("--theme-vt-x");
+        root.style.removeProperty("--theme-vt-y");
+        root.style.removeProperty("--theme-vt-r");
+
+        syncBrowserChrome(nextTheme);
+      });
 
       return true;
     } catch {
@@ -168,7 +166,16 @@ export default function ThemeToggle() {
 
     const nextTheme: Theme = theme === "light" ? "dark" : "light";
 
+    /*
+      Mobile fallback:
+      The browser top/bottom chrome is outside the View Transition,
+      so the radial animation can look broken on mobile.
+      Mobile now skips the native View Transition and uses the simple switch.
+    */
+    const isMobile = window.matchMedia("(max-width: 767px)").matches;
+
     if (
+      !isMobile &&
       !FORCE_SIMPLE_THEME_FALLBACK &&
       startNativeViewTransition(nextTheme, cx, cy, radius)
     ) {
