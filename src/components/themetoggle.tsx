@@ -18,6 +18,20 @@ type StartViewTransitionFn = (
   finished: Promise<void>;
 };
 
+const getThemeColors = (theme: Theme) => {
+  return theme === "light"
+    ? {
+        bg: "#ECEFF4",
+        fg: "#2E3440",
+        colorScheme: "light",
+      }
+    : {
+        bg: "#2E3440",
+        fg: "#ECEFF4",
+        colorScheme: "dark",
+      };
+};
+
 export default function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === "undefined") return "light";
@@ -26,21 +40,42 @@ export default function ThemeToggle() {
 
   const svgRef = useRef<SVGSVGElement>(null);
 
-  useLayoutEffect(() => {
-    const root = document.documentElement;
-    root.classList.toggle("light-theme", theme === "light");
-    root.classList.toggle("dark-theme", theme === "dark");
-  }, [theme]);
-
   const applyTheme = (nextTheme: Theme) => {
     const root = document.documentElement;
+    const { bg, fg, colorScheme } = getThemeColors(nextTheme);
 
     root.classList.toggle("light-theme", nextTheme === "light");
     root.classList.toggle("dark-theme", nextTheme === "dark");
+    root.setAttribute("data-theme-applied", "true");
+
+    root.style.backgroundColor = bg;
+    root.style.colorScheme = colorScheme;
+
+    if (document.body) {
+      document.body.style.backgroundColor = bg;
+      document.body.style.color = fg;
+    }
+
+    let metaTheme = document.querySelector<HTMLMetaElement>(
+      'meta[name="theme-color"]'
+    );
+
+    if (!metaTheme) {
+      metaTheme = document.createElement("meta");
+      metaTheme.name = "theme-color";
+      document.head.appendChild(metaTheme);
+    }
+
+    metaTheme.setAttribute("content", bg);
 
     setTheme(nextTheme);
     localStorage.setItem("theme", nextTheme);
   };
+
+  useLayoutEffect(() => {
+    applyTheme(theme);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const startNativeViewTransition = (
     nextTheme: Theme,
@@ -106,7 +141,6 @@ export default function ThemeToggle() {
 
     const nextTheme: Theme = theme === "light" ? "dark" : "light";
 
-    // Modern browsers: native radial view transition
     if (
       !FORCE_SIMPLE_THEME_FALLBACK &&
       startNativeViewTransition(nextTheme, cx, cy, radius)
@@ -117,7 +151,6 @@ export default function ThemeToggle() {
     const root = document.documentElement;
     root.classList.add("theme-switching");
 
-    // Forced fallback or older browsers: simple instant theme switch
     applyTheme(nextTheme);
 
     requestAnimationFrame(() => {
@@ -132,6 +165,10 @@ export default function ThemeToggle() {
         viewBox="0 0 24 24"
         className={styles.themeToggle}
         onClick={toggleTheme}
+        onKeyDown={(e) => e.key === "Enter" && toggleTheme()}
+        tabIndex={0}
+        role="button"
+        aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
       >
         {theme === "light" ? (
           <path
