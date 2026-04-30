@@ -40,13 +40,9 @@ export default function ThemeToggle() {
 
   const svgRef = useRef<SVGSVGElement>(null);
 
-  const applyTheme = (nextTheme: Theme) => {
+  const syncBrowserChrome = (nextTheme: Theme) => {
     const root = document.documentElement;
     const { bg, fg, colorScheme } = getThemeColors(nextTheme);
-
-    root.classList.toggle("light-theme", nextTheme === "light");
-    root.classList.toggle("dark-theme", nextTheme === "dark");
-    root.setAttribute("data-theme-applied", "true");
 
     root.style.backgroundColor = bg;
     root.style.colorScheme = colorScheme;
@@ -67,13 +63,28 @@ export default function ThemeToggle() {
     }
 
     metaTheme.setAttribute("content", bg);
+  };
+
+  const applyTheme = (
+    nextTheme: Theme,
+    options: { updateBrowserChrome?: boolean } = {}
+  ) => {
+    const root = document.documentElement;
+
+    root.classList.toggle("light-theme", nextTheme === "light");
+    root.classList.toggle("dark-theme", nextTheme === "dark");
+    root.setAttribute("data-theme-applied", "true");
 
     setTheme(nextTheme);
     localStorage.setItem("theme", nextTheme);
+
+    if (options.updateBrowserChrome !== false) {
+      syncBrowserChrome(nextTheme);
+    }
   };
 
   useLayoutEffect(() => {
-    applyTheme(theme);
+    applyTheme(theme, { updateBrowserChrome: true });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -102,7 +113,13 @@ export default function ThemeToggle() {
 
       const transition = startViewTransition.call(document, {
         update: () => {
-          applyTheme(nextTheme);
+          /*
+            Important:
+            Do not update meta[name="theme-color"] here.
+            Mobile browser top/bottom areas are outside the View Transition,
+            so updating them immediately makes the animation look broken.
+          */
+          applyTheme(nextTheme, { updateBrowserChrome: false });
         },
         types: [type],
       });
@@ -111,6 +128,11 @@ export default function ThemeToggle() {
         root.style.removeProperty("--theme-vt-x");
         root.style.removeProperty("--theme-vt-y");
         root.style.removeProperty("--theme-vt-r");
+
+        /*
+          Update mobile browser chrome only after the page animation finishes.
+        */
+        syncBrowserChrome(nextTheme);
       });
 
       return true;
@@ -151,7 +173,7 @@ export default function ThemeToggle() {
     const root = document.documentElement;
     root.classList.add("theme-switching");
 
-    applyTheme(nextTheme);
+    applyTheme(nextTheme, { updateBrowserChrome: true });
 
     requestAnimationFrame(() => {
       root.classList.remove("theme-switching");
