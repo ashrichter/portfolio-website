@@ -121,26 +121,24 @@ export default function ThemeToggle() {
         Dark -> Light:
         Delay browser chrome update until the light reveal has finished.
       */
-      if (nextTheme === "dark") {
-        syncBrowserChrome(nextTheme);
-      }
-
-      const transition = startViewTransition.call(document, {
-        update: () => {
-          applyTheme(nextTheme, { updateBrowserChrome: false });
-        },
-        types: [type],
-      });
-
-      transition.finished.finally(() => {
-        root.style.removeProperty("--theme-vt-x");
-        root.style.removeProperty("--theme-vt-y");
-        root.style.removeProperty("--theme-vt-r");
-
-        if (nextTheme === "light") {
+        const transition = startViewTransition.call(document, {
+          update: () => {
+            applyTheme(nextTheme, { updateBrowserChrome: false });
+          },
+          types: [type],
+        });
+        
+        window.setTimeout(() => {
           syncBrowserChrome(nextTheme);
-        }
-      });
+        }, nextTheme === "dark" ? 120 : 420);
+        
+        transition.finished.finally(() => {
+          root.style.removeProperty("--theme-vt-x");
+          root.style.removeProperty("--theme-vt-y");
+          root.style.removeProperty("--theme-vt-r");
+        
+          syncBrowserChrome(nextTheme);
+        });
 
       return true;
     } catch {
