@@ -111,14 +111,22 @@ export default function ThemeToggle() {
       const type =
         nextTheme === "light" ? "theme-to-light" : "theme-to-dark";
 
+      /*
+        Mobile browser top/bottom chrome is outside the View Transition.
+
+        Light -> Dark:
+        Update browser chrome immediately because your dark theme is the
+        background behind the shrinking old light layer.
+
+        Dark -> Light:
+        Delay browser chrome update until the light reveal has finished.
+      */
+      if (nextTheme === "dark") {
+        syncBrowserChrome(nextTheme);
+      }
+
       const transition = startViewTransition.call(document, {
         update: () => {
-          /*
-            Important:
-            Do not update meta[name="theme-color"] here.
-            Mobile browser top/bottom areas are outside the View Transition,
-            so updating them immediately makes the animation look broken.
-          */
           applyTheme(nextTheme, { updateBrowserChrome: false });
         },
         types: [type],
@@ -129,10 +137,9 @@ export default function ThemeToggle() {
         root.style.removeProperty("--theme-vt-y");
         root.style.removeProperty("--theme-vt-r");
 
-        /*
-          Update mobile browser chrome only after the page animation finishes.
-        */
-        syncBrowserChrome(nextTheme);
+        if (nextTheme === "light") {
+          syncBrowserChrome(nextTheme);
+        }
       });
 
       return true;
