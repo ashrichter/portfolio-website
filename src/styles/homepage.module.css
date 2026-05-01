@@ -4,7 +4,7 @@
 
 /* Main wrapper for homepage/menu content */
 .homedivmain {
-  height: 100dvh;
+  height: 100%;
   min-height: 0;
 
   box-sizing: border-box;

@@ -1,77 +1,91 @@
 /* ======================================================
-   FILTER TAGS
-   ====================================================== */
-
-   .filterTags {
-    margin: 1em 1em;
-    background: var(--primary-color);
-}
-
-.filterTags span {
-    display: inline-block;
-    color: var(--chip-text);
-    opacity: 0.7;
-    background-color: var(--chip-bg);
-    padding: 6px 6px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    font-size: var(--fsize-smol);
-    cursor: pointer;
-    transition: opacity var(--base-transition-time) ease;
-}
-
-.filterTags span:hover {
-    opacity: 1;
-}
-
-.filterTags .activeTag {
-    opacity: 0.9;
-    background-color: var(--text-color-dark);
-    color: var(--chip-active-text);
-    /* color: #000; */
-
-}
-
-.filterTags .activeTag:hover {
-    background-color: var(--chip-active-bg);
-    color: var(--chip-active-text);
-}
-
-/* ======================================================
    MAIN PROJECT CONTAINER
    ====================================================== */
 
    .projectMainDiv {
-    margin: 1em;
+    margin: 0;
+    padding: 1em;
     padding-bottom: 30px;
+  
+    min-height: 100%;
+  
     background-color: var(--primary-color);
     color: var(--text-color);
-}
-
-/* ======================================================
-   PROJECTS GRID
-   ====================================================== */
-
-.projectsGrid {
+  }
+  
+  /* ======================================================
+     FILTER TAGS
+     ====================================================== */
+  
+  .filterTags {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  
+    margin: 0;
+    padding: 1em 0;
+  
+    background: var(--primary-color);
+  }
+  
+  .filterTags span {
+    display: inline-block;
+  
+    color: var(--chip-text);
+    opacity: 0.7;
+    background-color: var(--chip-bg);
+  
+    padding: 6px 6px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  
+    border-radius: 5px;
+    font-size: var(--fsize-smol);
+    cursor: pointer;
+  
+    transition: opacity var(--base-transition-time) ease;
+  }
+  
+  .filterTags span:hover {
+    opacity: 1;
+  }
+  
+  .filterTags .activeTag {
+    opacity: 0.9;
+    background-color: var(--text-color-dark);
+    color: var(--chip-active-text);
+  }
+  
+  .filterTags .activeTag:hover {
+    background-color: var(--chip-active-bg);
+    color: var(--chip-active-text);
+  }
+  
+  /* ======================================================
+     PROJECTS GRID
+     ====================================================== */
+  
+  .projectsGrid {
     margin-top: 20px;
+  
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
     justify-items: center;
     gap: 10px;
+  
     background: var(--primary-color);
-}
-
-@media screen and (max-width: 1079px) {
+  }
+  
+  @media screen and (max-width: 1079px) {
     .projectsGrid {
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     }
-}
-
-:global(html.theme-switching) .projectMainDiv,
-:global(html.theme-switching) .projectsGrid,
-:global(html.theme-switching) .filterTags,
-:global(html.theme-switching) .filterTags span,
-:global(html.theme-switching) .activeTag {
-  transition: none !important;
-}
+  }
+  
+  :global(html.theme-switching) .projectMainDiv,
+  :global(html.theme-switching) .projectsGrid,
+  :global(html.theme-switching) .filterTags,
+  :global(html.theme-switching) .filterTags span,
+  :global(html.theme-switching) .activeTag {
+    transition: none !important;
+  }

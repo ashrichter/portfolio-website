@@ -2,60 +2,85 @@
    PAGER / MAIN FOCUS
    ====================================================== */
 
-   .pagerMainDiv:focus {
+   .pagerMainDiv {
+    height: 100%;
+    min-height: 0;
+  
+    overflow-y: auto;
+    overflow-x: hidden;
+  
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  
+    background: var(--primary-color);
+    color: var(--text-color);
+  }
+  
+  .pagerMainDiv:focus {
     outline: none;
-}
-
-.pagerBody {
+  }
+  
+  .pagerBody {
     position: relative;
     display: flex;
+  
+    min-height: 0;
+  
     background: var(--primary-color);
     color: var(--text-color);
-}
-
-.pagerContent {
+  }
+  
+  .pagerContent {
     margin: 0 auto;
-    overflow-x: auto;
+  
+    overflow-x: hidden;
+  
     background: var(--primary-color);
     color: var(--text-color);
-}
-
-.pagerContent section {
+  }
+  
+  .pagerContent section {
     margin-bottom: 50px;
     background: var(--primary-color);
     color: var(--text-color);
-}
+  }
 
 /* ======================================================
-   NAVBAR (UNCHANGED)
+   NAVBAR
    ====================================================== */
 
-.navBar {
+   .navBar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+  
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 10;
-    top: 0;
+  
     font-size: large;
     padding: 1em 2em;
-}
-
-.navBar span {
+  
+    background: var(--primary-color);
+    color: var(--text-color);
+  }
+  
+  .navBar span {
     cursor: pointer;
     font-size: var(--fsize-mid);
     transition: color var(--base-transition-time) ease;
-}
-
-.navBar span:hover {
+  }
+  
+  .navBar span:hover {
     color: var(--hover-color);
-}
-
-/* Navbar Right */
-.navRight {
+  }
+  
+  /* Navbar Right */
+  .navRight {
     display: flex;
     align-items: center;
     gap: 1rem;
-}
+  }
 
 /* Keep arrow container size consistent */
 .arrowContainer {
