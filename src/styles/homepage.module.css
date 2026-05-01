@@ -2,12 +2,33 @@
    MAIN PAGE CONTAINER
    ====================================================== */
 
-/* Main wrapper for the homepage content */
+/* Main wrapper for homepage/menu content */
 .homedivmain {
+  height: 100dvh;
+  min-height: 0;
+
+  box-sizing: border-box;
+
   padding-left: var(--main-div-padding-left);
-  padding-right: var(--main-div-padding-left);
+  padding-right: var(--main-div-padding-right);
+
+  background-color: var(--primary-color);
+  color: var(--text-color);
 }
 
+/* Default behaviour for menu pages */
+.lockedPage {
+  overflow: hidden;
+}
+
+/* Only used when the Projects menu section is active */
+.scrollPage {
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
 
 /* ======================================================
    ABOUT SECTION
