@@ -110,27 +110,33 @@ export default function ProjectsPage(props: {
   });
 
   return (
-    <main>
+    <div
+      className={
+        activeProject === -1
+          ? styles.projectPageScroll
+          : styles.projectPageLocked
+      }
+    >
       {activeProject === -1 ? (
         <>
           <Navbar to_path="/" name="Home" />
-
+  
           <div className={styles.projectMainDiv}>
             <h2>My Projects,</h2>
-
+  
             <div className={styles.filterTags}>
               {tagsJsx}
             </div>
-
+  
             <hr />
-
+  
             <div className={styles.projectsGrid}>
               {filteredEntries.map((_, arrIndex) => {
                 const index =
                   filteredEntries[filteredEntries.length - 1 - arrIndex];
-
+  
                 const project = props.projects[index];
-
+  
                 return (
                   <ProjectHolder
                     key={index}
@@ -158,6 +164,6 @@ export default function ProjectsPage(props: {
           checkIndex={pagerHelper}
         />
       )}
-    </main>
+    </div>
   );
 }
